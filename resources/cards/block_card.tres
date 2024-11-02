@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://dwoxx76qsbfys"]
+
+[ext_resource type="Script" path="res://scripts/card_data.gd" id="1_8hq8f"]
+
+[resource]
+script = ExtResource("1_8hq8f")
+name = "Block"
+energy_cost = 1
+card_type = "block"
+effect_value = 5
+effect_description = "Gain 5 block"
