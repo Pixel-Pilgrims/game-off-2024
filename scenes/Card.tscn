@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cpp37o7600nho"]
 
-[ext_resource type="Script" path="res://scripts/card.gd" id="1_p7luq"]
+[ext_resource type="Script" path="res://scripts/cards/card.gd" id="1_p7luq"]
 
 [node name="Card" type="Control"]
 custom_minimum_size = Vector2(200, 300)
@@ -44,18 +44,18 @@ layout_mode = 2
 [node name="CostLabel" type="Label" parent="MarginContainer/VBoxContainer/TopBar"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "1"
+text = "666"
 
 [node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/TopBar"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Strike"
+text = "Unleash all demons"
 
 [node name="EffectLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(180, 200)
 layout_mode = 2
 size_flags_vertical = 3
-text = "Deal 6 damage"
+text = "Unleash all demons, with the power of THE DEBUG!"
 horizontal_alignment = 1
 autowrap_mode = 2
 

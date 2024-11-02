@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://duyk27ghemr8s"]
+
+[ext_resource type="Script" path="res://scripts/decode_ui.gd" id="1_d4e5u"]
+
+[node name="DecodeUI" type="PanelContainer"]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -75.0
+offset_right = 100.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d4e5u")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="DecodePointsLabel" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Decode Points: 0"
+horizontal_alignment = 1
+
+[node name="OptionsContainer" type="VBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="CloseButton" type="Button" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Close"
+
+[connection signal="pressed" from="MarginContainer/VBox/CloseButton" to="." method="hide"]

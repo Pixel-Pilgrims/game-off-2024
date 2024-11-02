@@ -1,3 +1,4 @@
+# hand_manager.gd
 extends Node
 
 const CARD_SCENE = preload("res://scenes/Card.tscn")
@@ -33,8 +34,15 @@ func draw_cards(amount: int) -> void:
 func create_card(card_data: Resource) -> void:
 	var card_instance = CARD_SCENE.instantiate()
 	hand_container.add_child(card_instance)
-	card_instance.setup(card_data)
-	card_instance.connect("card_played", _on_card_played,CONNECT_ONE_SHOT)
+	
+	# Load decode state from GameState
+	var decoded_aspects = {}
+	if card_data.resource_path in GameState.decoded_aspects:
+		decoded_aspects = GameState.decoded_aspects[card_data.resource_path].duplicate()
+	
+	# Initialize card with both data and decode state
+	card_instance.setup(card_data, decoded_aspects)
+	card_instance.connect("card_played", _on_card_played, CONNECT_ONE_SHOT)
 	hand.append(card_instance)
 
 func discard_hand() -> void:

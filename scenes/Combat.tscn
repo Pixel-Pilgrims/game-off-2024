@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqup6jb3jks6m"]
+[gd_scene load_steps=8 format=3 uid="uid://bqup6jb3jks6m"]
 
-[ext_resource type="Script" path="res://scripts/combat_manager.gd" id="1_evyhb"]
-[ext_resource type="Script" path="res://scenes/combat.gd" id="1_nxceq"]
-[ext_resource type="Script" path="res://scripts/hand_manager.gd" id="2_h8j1s"]
+[ext_resource type="Script" path="res://scripts/managers/combat_manager.gd" id="1_evyhb"]
+[ext_resource type="Script" path="res://scripts/combat.gd" id="1_nxceq"]
+[ext_resource type="Script" path="res://scripts/managers/hand_manager.gd" id="2_h8j1s"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="3_eptra"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="4_b6im6"]
+[ext_resource type="Script" path="res://scripts/managers/decoder_manager.gd" id="4_w75aa"]
+[ext_resource type="PackedScene" uid="uid://duyk27ghemr8s" path="res://scenes/decode_ui.tscn" id="6_jgfcw"]
 
 [node name="Combat" type="Node2D"]
 script = ExtResource("1_nxceq")
@@ -14,6 +16,9 @@ script = ExtResource("1_evyhb")
 
 [node name="HandManager" type="Node" parent="."]
 script = ExtResource("2_h8j1s")
+
+[node name="DecoderManager" type="Node" parent="."]
+script = ExtResource("4_w75aa")
 
 [node name="PlayArea" type="Control" parent="."]
 layout_mode = 3
@@ -102,3 +107,5 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
+
+[node name="DecodeUI" parent="UI" instance=ExtResource("6_jgfcw")]
