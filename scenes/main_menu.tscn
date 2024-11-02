@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxru22786wp6n"]
+[gd_scene load_steps=3 format=3 uid="uid://bxru22786wp6n"]
 
-[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_qcqg6"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_f1qkp"]
+[ext_resource type="Script" path="res://scripts/background_system.gd" id="2_54lwu"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -9,9 +10,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_qcqg6")
+script = ExtResource("1_f1qkp")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+z_index = 100
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,9 +34,14 @@ horizontal_alignment = 1
 [node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
+theme_override_font_sizes/font_size = 120
 text = "Start Game"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
+theme_override_font_sizes/font_size = 120
 text = "Quit"
+
+[node name="BackgroundSystem" type="Node" parent="."]
+script = ExtResource("2_54lwu")

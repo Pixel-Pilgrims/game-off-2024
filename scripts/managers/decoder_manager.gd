@@ -17,13 +17,13 @@ func _ready() -> void:
 	# Update UI on startup
 	points_changed.emit(available_points)
 
-func can_decode_aspect(card: Node, aspect: String) -> bool:
+func can_decode_aspect(aspect: String) -> bool:
 	if not DECODE_COSTS.has(aspect):
 		return false
 	return available_points >= DECODE_COSTS[aspect]
 
 func decode_aspect(card: Node, aspect: String) -> void:
-	if not can_decode_aspect(card, aspect):
+	if not can_decode_aspect(aspect):
 		return
 		
 	var cost = DECODE_COSTS[aspect]

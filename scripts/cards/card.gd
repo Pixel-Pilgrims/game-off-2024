@@ -91,9 +91,7 @@ func execute_effect() -> void:
 func show_decode_menu() -> void:
 	var popup = PopupMenu.new()
 	add_child(popup)
-	
-	var decoder = get_node("/root/Main/Combat/DecoderManager")
-	
+		
 	# Add decode options
 	if not is_aspect_decoded("cost"):
 		popup.add_item("Decode Cost (2 points)", 0)

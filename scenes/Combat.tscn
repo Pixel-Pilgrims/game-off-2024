@@ -1,24 +1,32 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqup6jb3jks6m"]
+[gd_scene load_steps=10 format=3 uid="uid://bqup6jb3jks6m"]
 
-[ext_resource type="Script" path="res://scripts/managers/combat_manager.gd" id="1_evyhb"]
-[ext_resource type="Script" path="res://scripts/combat.gd" id="1_nxceq"]
-[ext_resource type="Script" path="res://scripts/managers/hand_manager.gd" id="2_h8j1s"]
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="3_eptra"]
-[ext_resource type="Script" path="res://scripts/player.gd" id="4_b6im6"]
-[ext_resource type="Script" path="res://scripts/managers/decoder_manager.gd" id="4_w75aa"]
-[ext_resource type="PackedScene" uid="uid://duyk27ghemr8s" path="res://scenes/decode_ui.tscn" id="6_jgfcw"]
+[ext_resource type="Script" path="res://scripts/combat.gd" id="1_5fcjk"]
+[ext_resource type="Script" path="res://scripts/managers/combat_manager.gd" id="2_305ab"]
+[ext_resource type="Script" path="res://scripts/managers/hand_manager.gd" id="3_bdk6y"]
+[ext_resource type="Script" path="res://scripts/managers/decoder_manager.gd" id="4_vgm5a"]
+[ext_resource type="Script" path="res://scripts/managers/pause_manager.gd" id="5_pl43j"]
+[ext_resource type="Script" path="res://scripts/background_system.gd" id="6_ucnrj"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="7_dwwk6"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="8_grmhu"]
+[ext_resource type="PackedScene" uid="uid://duyk27ghemr8s" path="res://scenes/decode_ui.tscn" id="9_1iax2"]
 
 [node name="Combat" type="Node2D"]
-script = ExtResource("1_nxceq")
+script = ExtResource("1_5fcjk")
 
 [node name="CombatManager" type="Node" parent="."]
-script = ExtResource("1_evyhb")
+script = ExtResource("2_305ab")
 
 [node name="HandManager" type="Node" parent="."]
-script = ExtResource("2_h8j1s")
+script = ExtResource("3_bdk6y")
 
 [node name="DecoderManager" type="Node" parent="."]
-script = ExtResource("4_w75aa")
+script = ExtResource("4_vgm5a")
+
+[node name="PauseManager" type="Node" parent="."]
+script = ExtResource("5_pl43j")
+
+[node name="BackgroundSystem" type="Node" parent="."]
+script = ExtResource("6_ucnrj")
 
 [node name="PlayArea" type="Control" parent="."]
 layout_mode = 3
@@ -30,7 +38,7 @@ grow_vertical = 2
 
 [node name="Player" type="Node2D" parent="."]
 position = Vector2(300, 300)
-script = ExtResource("4_b6im6")
+script = ExtResource("7_dwwk6")
 
 [node name="Visual" type="ColorRect" parent="Player"]
 offset_right = 100.0
@@ -40,12 +48,13 @@ color = Color(0, 1, 0, 1)
 [node name="HealthLabel" type="Label" parent="Player"]
 offset_right = 40.0
 offset_bottom = 23.0
-text = "20
+theme_override_font_sizes/font_size = 70
+text = "<player_health>
 "
 
 [node name="Enemy" type="Node2D" parent="."]
 position = Vector2(700, 300)
-script = ExtResource("3_eptra")
+script = ExtResource("8_grmhu")
 
 [node name="Visual" type="ColorRect" parent="Enemy"]
 offset_right = 100.0
@@ -55,7 +64,8 @@ color = Color(1, 0, 0, 1)
 [node name="HealthLabel" type="Label" parent="Enemy"]
 offset_right = 40.0
 offset_bottom = 23.0
-text = "10"
+theme_override_font_sizes/font_size = 70
+text = "<enemy_health>"
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -77,7 +87,8 @@ offset_top = 50.0
 offset_right = -212.0
 offset_bottom = 73.0
 grow_horizontal = 0
-text = "6"
+theme_override_font_sizes/font_size = 193
+text = "<energy>"
 
 [node name="EndTurnButton" type="Button" parent="UI/HUD"]
 layout_mode = 1
@@ -92,6 +103,7 @@ offset_right = -177.0
 offset_bottom = -117.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_font_sizes/font_size = 70
 text = "End turn"
 
 [node name="HandContainer" type="HBoxContainer" parent="UI/HUD"]
@@ -108,4 +120,4 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="DecodeUI" parent="UI" instance=ExtResource("6_jgfcw")]
+[node name="DecodeUI" parent="UI" instance=ExtResource("9_1iax2")]
