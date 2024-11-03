@@ -21,7 +21,7 @@ config/features=PackedStringArray("4.3", "GL Compatibility")
 
 [autoload]
 
-GameState="*res://scripts/game_state.gd"
+GameState="*res://scripts/autoload/game_state.gd"
 
 [display]
 
