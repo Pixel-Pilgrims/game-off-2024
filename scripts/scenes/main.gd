@@ -1,7 +1,7 @@
 extends Node
 
 @onready var combat_scene = preload("res://scenes/combat.tscn")
-@onready var menu_scene = preload("res://scenes/main_menu.tscn")
+@onready var menu_scene = preload("res://scenes/menus/main_menu/main_menu.tscn")
 
 var current_scene: Node = null
 
