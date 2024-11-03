@@ -6,7 +6,7 @@ var is_player_turn: bool = true
 
 @onready var hand_manager: Node = $"../HandManager"
 @onready var enemy: Node = $"../Enemy"
-@onready var energy_label: Label = $"../UI/HUD/EnergyLabel"
+@onready var energy_label: Label = $"../UI/HUD/EnergyMarginContainer/EnergyTexture/EnergyLabel"
 
 func _ready() -> void:
 	await hand_manager.ready

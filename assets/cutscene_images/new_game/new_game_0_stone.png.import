@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwbi03kpphh1s"
-path="res://.godot/imported/combat_bg.webp-d095fd9e786c3465d3aa5dc024ae32ca.ctex"
+uid="uid://wv57ymcqwumg"
+path="res://.godot/imported/new_game_0_stone.png-71c765ae979a047400294ddb2057df50.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/backgrounds/combat_bg.webp"
-dest_files=["res://.godot/imported/combat_bg.webp-d095fd9e786c3465d3aa5dc024ae32ca.ctex"]
+source_file="res://assets/cutscene_images/new_game/new_game_0_stone.png"
+dest_files=["res://.godot/imported/new_game_0_stone.png-71c765ae979a047400294ddb2057df50.ctex"]
 
 [params]
 

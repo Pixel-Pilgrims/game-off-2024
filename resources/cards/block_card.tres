@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://dwoxx76qsbfys"]
 
-[ext_resource type="Script" path="res://scripts/cards/card_data.gd" id="1_8hq8f"]
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1_vpyxy"]
 
 [resource]
-script = ExtResource("1_8hq8f")
+script = ExtResource("1_vpyxy")
 name = "Block"
 energy_cost = 1
 card_type = "block"

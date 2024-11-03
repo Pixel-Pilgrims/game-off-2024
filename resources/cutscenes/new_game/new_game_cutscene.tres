@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="CutsceneData" load_steps=10 format=3 uid="uid://cmss538sh2l7r"]
+
+[ext_resource type="Script" path="res://scripts/data/cutscene_data.gd" id="1_b1qtf"]
+[ext_resource type="AudioStream" uid="uid://b6miq63f23cyk" path="res://assets/audio/new_game_narrative.mp3" id="1_mx5nb"]
+[ext_resource type="Script" path="res://scripts/data/cutscene_frame_data.gd" id="2_ireuw"]
+[ext_resource type="Texture2D" uid="uid://wv57ymcqwumg" path="res://assets/cutscene_images/new_game/new_game_0_stone.png" id="3_sptdj"]
+[ext_resource type="Texture2D" uid="uid://x7r1vbh43dhe" path="res://assets/cutscene_images/new_game/new_game_1_marketplace.png" id="4_x3eri"]
+[ext_resource type="Texture2D" uid="uid://qoukk6jbsbu0" path="res://assets/cutscene_images/new_game/new_game_2_rocky_outcrop.png" id="5_7v7wn"]
+
+[sub_resource type="Resource" id="Resource_dxda3"]
+script = ExtResource("2_ireuw")
+timestamp = 0.0
+image = ExtResource("3_sptdj")
+
+[sub_resource type="Resource" id="Resource_gcroa"]
+script = ExtResource("2_ireuw")
+timestamp = 6.0
+image = ExtResource("4_x3eri")
+
+[sub_resource type="Resource" id="Resource_5aa0k"]
+script = ExtResource("2_ireuw")
+timestamp = 22.0
+image = ExtResource("5_7v7wn")
+
+[resource]
+resource_name = "New Game"
+script = ExtResource("1_b1qtf")
+audio_track = ExtResource("1_mx5nb")
+frames = Array[ExtResource("2_ireuw")]([SubResource("Resource_dxda3"), SubResource("Resource_gcroa"), SubResource("Resource_5aa0k")])

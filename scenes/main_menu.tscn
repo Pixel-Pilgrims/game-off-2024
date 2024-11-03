@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxru22786wp6n"]
+[gd_scene load_steps=4 format=3 uid="uid://bxru22786wp6n"]
 
-[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_f1qkp"]
-[ext_resource type="Script" path="res://scripts/background_system.gd" id="2_54lwu"]
+[ext_resource type="Script" path="res://scripts/scenes/main_menu.gd" id="1_6lpdf"]
+[ext_resource type="Script" path="res://scripts/systems/background_system.gd" id="2_bhogi"]
+[ext_resource type="Script" path="res://scripts/systems/cutscene_system.gd" id="3_khhxk"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -10,7 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_f1qkp")
+script = ExtResource("1_6lpdf")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 z_index = 100
@@ -31,11 +32,25 @@ theme_override_font_sizes/font_size = 48
 text = "Card Game"
 horizontal_alignment = 1
 
+[node name="ContinueButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 120
+disabled = true
+text = "Continue Game"
+
 [node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 120
-text = "Start Game"
+text = "New Game"
+
+[node name="Options" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 120
+disabled = true
+text = "Options"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 50)
@@ -44,4 +59,7 @@ theme_override_font_sizes/font_size = 120
 text = "Quit"
 
 [node name="BackgroundSystem" type="Node" parent="."]
-script = ExtResource("2_54lwu")
+script = ExtResource("2_bhogi")
+
+[node name="CutsceneSystem" type="Node" parent="."]
+script = ExtResource("3_khhxk")

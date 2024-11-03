@@ -1,17 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqup6jb3jks6m"]
+[gd_scene load_steps=11 format=3 uid="uid://bqup6jb3jks6m"]
 
-[ext_resource type="Script" path="res://scripts/combat.gd" id="1_5fcjk"]
+[ext_resource type="Script" path="res://scripts/scenes/combat.gd" id="1_n5yyl"]
 [ext_resource type="Script" path="res://scripts/managers/combat_manager.gd" id="2_305ab"]
 [ext_resource type="Script" path="res://scripts/managers/hand_manager.gd" id="3_bdk6y"]
 [ext_resource type="Script" path="res://scripts/managers/decoder_manager.gd" id="4_vgm5a"]
 [ext_resource type="Script" path="res://scripts/managers/pause_manager.gd" id="5_pl43j"]
-[ext_resource type="Script" path="res://scripts/background_system.gd" id="6_ucnrj"]
+[ext_resource type="Script" path="res://scripts/systems/background_system.gd" id="6_l1wfx"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="7_dwwk6"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="8_grmhu"]
 [ext_resource type="PackedScene" uid="uid://duyk27ghemr8s" path="res://scenes/decode_ui.tscn" id="9_1iax2"]
+[ext_resource type="Texture2D" uid="uid://dyx76tn885md3" path="res://assets/UI/energy_orb.png" id="9_5ngnq"]
 
 [node name="Combat" type="Node2D"]
-script = ExtResource("1_5fcjk")
+script = ExtResource("1_n5yyl")
 
 [node name="CombatManager" type="Node" parent="."]
 script = ExtResource("2_305ab")
@@ -26,7 +27,7 @@ script = ExtResource("4_vgm5a")
 script = ExtResource("5_pl43j")
 
 [node name="BackgroundSystem" type="Node" parent="."]
-script = ExtResource("6_ucnrj")
+script = ExtResource("6_l1wfx")
 
 [node name="PlayArea" type="Control" parent="."]
 layout_mode = 3
@@ -77,35 +78,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="EnergyLabel" type="Label" parent="UI/HUD"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -252.0
-offset_top = 50.0
-offset_right = -212.0
-offset_bottom = 73.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 193
-text = "<energy>"
-
-[node name="EndTurnButton" type="Button" parent="UI/HUD"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -252.0
-offset_top = -148.0
-offset_right = -177.0
-offset_bottom = -117.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 70
-text = "End turn"
-
 [node name="HandContainer" type="HBoxContainer" parent="UI/HUD"]
 layout_mode = 1
 anchors_preset = 7
@@ -119,5 +91,57 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
+
+[node name="EndTurnMarginContainer" type="MarginContainer" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -104.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="EndTurnButton" type="Button" parent="UI/HUD/EndTurnMarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "End turn"
+
+[node name="EnergyMarginContainer" type="MarginContainer" parent="UI/HUD"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_bottom = 318.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+
+[node name="EnergyTexture" type="TextureRect" parent="UI/HUD/EnergyMarginContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("9_5ngnq")
+expand_mode = 1
+
+[node name="EnergyLabel" type="Label" parent="UI/HUD/EnergyMarginContainer/EnergyTexture"]
+layout_mode = 2
+offset_left = -237.0
+offset_top = 4.0
+offset_right = 438.0
+offset_bottom = 196.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 140
+text = "<enrg>"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="DecodeUI" parent="UI" instance=ExtResource("9_1iax2")]
