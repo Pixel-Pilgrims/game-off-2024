@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cpp37o7600nho"]
 
 [ext_resource type="Script" path="res://scripts/scenes/card.gd" id="1_p7luq"]
-[ext_resource type="Texture2D" uid="uid://df58t5bfmj70a" path="res://resources/cards/scroll_base.png" id="2_bvhgb"]
+[ext_resource type="Texture2D" uid="uid://df58t5bfmj70a" path="res://assets/ui/scroll_base.png" id="2_mugk4"]
 
 [node name="Card" type="Control"]
 custom_minimum_size = Vector2(200, 300)
@@ -18,7 +18,7 @@ script = ExtResource("1_p7luq")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1, 1)
 scale = Vector2(0.995, 0.996805)
-texture = ExtResource("2_bvhgb")
+texture = ExtResource("2_mugk4")
 centered = false
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

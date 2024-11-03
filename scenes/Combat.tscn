@@ -9,11 +9,11 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="7_dwwk6"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="8_grmhu"]
 [ext_resource type="PackedScene" uid="uid://duyk27ghemr8s" path="res://scenes/decode_ui.tscn" id="9_1iax2"]
-[ext_resource type="Texture2D" uid="uid://dyx76tn885md3" path="res://assets/UI/energy_orb.png" id="9_5ngnq"]
-[ext_resource type="Texture2D" uid="uid://b27cwck0oyrc" path="res://resources/ui/tilemap_packed.png" id="10_ckmwn"]
+[ext_resource type="Texture2D" uid="uid://dyx76tn885md3" path="res://assets/ui/energy_orb.png" id="9_e0ys4"]
+[ext_resource type="Texture2D" uid="uid://b27cwck0oyrc" path="res://assets/ui/tilemap_packed.png" id="10_8ctap"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iekpm"]
-texture = ExtResource("10_ckmwn")
+texture = ExtResource("10_8ctap")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -442,7 +442,7 @@ custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("9_5ngnq")
+texture = ExtResource("9_e0ys4")
 expand_mode = 1
 
 [node name="EnergyLabel" type="Label" parent="UI/HUD/EnergyMarginContainer/EnergyTexture"]
