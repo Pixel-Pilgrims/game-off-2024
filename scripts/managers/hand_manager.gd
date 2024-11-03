@@ -1,7 +1,7 @@
 # hand_manager.gd
 extends Node
 
-const CARD_SCENE = preload("res://scenes/Card.tscn")
+const CARD_SCENE = preload("res://scenes/card.tscn")
 
 var draw_pile: Array = []
 var hand: Array = []
