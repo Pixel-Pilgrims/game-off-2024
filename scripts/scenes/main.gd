@@ -1,11 +1,14 @@
+# main.gd
 extends Node
 
 @onready var combat_scene = preload("res://scenes/combat.tscn")
-@onready var menu_scene = preload("res://scenes/menus/main_menu/main_menu.tscn")
+@onready var menu_scene = preload("res://scenes/menus/main_menu.tscn")
 
 var current_scene: Node = null
 
 func _ready():
+	# Ensure config is applied before showing the menu
+	await get_tree().create_timer(0.1).timeout
 	show_main_menu()
 
 func show_main_menu():

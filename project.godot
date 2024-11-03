@@ -21,6 +21,7 @@ config/features=PackedStringArray("4.3", "GL Compatibility")
 
 [autoload]
 
+ConfigManager="*res://scripts/managers/config_manager.gd"
 GameState="*res://scripts/autoload/game_state.gd"
 
 [display]
@@ -37,10 +38,6 @@ enabled=PackedStringArray("res://addons/maaacks_options_menus/plugin.cfg")
 
 config/itch_username=""
 config/itch_project_name=""
-
-[internationalization]
-
-locale/translations=PackedStringArray("res://addons/maaacks_options_menus/base/translations/menus_translations.en.translation", "res://addons/maaacks_options_menus/base/translations/menus_translations.fr.translation")
 
 [maaacks_options_menus]
 
