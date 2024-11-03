@@ -16,6 +16,7 @@ func show_main_menu():
 		current_scene.queue_free()
 	current_scene = menu_scene.instantiate()
 	add_child(current_scene)
+	# The menu will enable itself in its _ready() function
 
 func start_combat():
 	if current_scene:
