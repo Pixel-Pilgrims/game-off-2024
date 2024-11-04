@@ -14,6 +14,7 @@ func take_damage(amount: int) -> void:
 	update_health_display()
 	if health <= 0:
 		get_node("/root/Main").combat_won()
+		
 
 func take_turn() -> void:
 	print("Enemy turn")

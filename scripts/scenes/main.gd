@@ -3,6 +3,7 @@ extends Node
 
 @onready var combat_scene = preload("res://scenes/combat.tscn")
 @onready var menu_scene = preload("res://scenes/menus/main_menu.tscn")
+@onready var home_base_scene = preload("res://scripts/scenes/home_base.tscn")
 
 var current_scene: Node = null
 
@@ -30,4 +31,11 @@ func start_combat():
 
 func combat_won():
 	print("Combat won")
-	show_main_menu()
+	start_home_base()
+	
+func start_home_base():
+	if current_scene:
+		current_scene.queue_free()
+	current_scene = home_base_scene.instantiate()
+	add_child(current_scene)
+	

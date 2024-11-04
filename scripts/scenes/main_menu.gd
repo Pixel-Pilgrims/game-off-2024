@@ -2,6 +2,7 @@
 extends Control
 
 const OPTIONS_SCENE = preload("res://scenes/menus/options_menu.tscn")
+const HOME_BASE_SCENE = preload("res://scripts/scenes/home_base.tscn")
 
 func _ready():
 	$CenterContainer/VBoxContainer/StartButton.pressed.connect(_on_start_pressed)
@@ -30,7 +31,7 @@ func _on_quit_pressed():
 func _on_continue_button_pressed() -> void:
 	print("continue pressed")
 	GameState.load_game()
-	start_combat()
+	get_node("/root/Main").start_home_base()
 
 func _on_options_pressed() -> void:
 	var options = OPTIONS_SCENE.instantiate()
