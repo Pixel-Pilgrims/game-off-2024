@@ -32,7 +32,7 @@ window/size/resizable=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/maaacks_options_menus/plugin.cfg")
+enabled=PackedStringArray()
 
 [github_to_itch]
 
