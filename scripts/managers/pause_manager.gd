@@ -6,6 +6,11 @@ var pause_menu: Control
 var is_paused: bool = false
 
 func _ready() -> void:
+	pause_menu = PAUSE_MENU.instantiate()
+	add_child(pause_menu)
+	# Register with UI scaling system
+	var ui_scale_manager = get_node("/root/Main/UIScaleManager")
+	ui_scale_manager.register_ui_root(pause_menu)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	pause_menu = PAUSE_MENU.instantiate()
 	add_child(pause_menu)

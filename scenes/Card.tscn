@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cpp37o7600nho"]
 
 [ext_resource type="Script" path="res://scripts/scenes/card.gd" id="1_p7luq"]
-[ext_resource type="Texture2D" uid="uid://df58t5bfmj70a" path="res://assets/UI/scroll_base.png" id="2_mugk4"]
+[ext_resource type="Texture2D" uid="uid://df58t5bfmj70a" path="res://assets/ui/scroll_base.png" id="2_mugk4"]
 
 [node name="Card" type="Control"]
 custom_minimum_size = Vector2(200, 300)

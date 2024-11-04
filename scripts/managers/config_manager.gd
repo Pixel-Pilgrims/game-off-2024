@@ -1,12 +1,14 @@
-# config_manager.gd
 extends Node
 
 const CONFIG_PATH = "user://config.cfg"
 
+signal resolution_changed(new_resolution: Vector2)
+signal window_mode_changed(is_fullscreen: bool)
+
 var config = {
 	"video": {
 		"fullscreen": false,
-		"resolution_index": 0
+		"resolution_index": 3  # Default to 1920x1080
 	},
 	"audio": {
 		"master_volume": 0,
@@ -15,18 +17,16 @@ var config = {
 }
 
 var resolutions = [
-	Vector2(1280, 720),
-	Vector2(1366, 768),
-	Vector2(1600, 900),
-	Vector2(1920, 1080),
-	Vector2(2560, 1440),
-	Vector2(3840, 2160)
+	Vector2i(1280, 720),
+	Vector2i(1366, 768),
+	Vector2i(1600, 900),
+	Vector2i(1920, 1080),
+	Vector2i(2560, 1440),
+	Vector2i(3840, 2160)
 ]
 
 func _ready() -> void:
-	# Important to call in _ready to ensure window exists
 	load_config()
-	# Call with a slight delay to ensure window is fully initialized
 	call_deferred("apply_config")
 
 func save_config() -> void:
@@ -43,7 +43,7 @@ func load_config() -> void:
 		var closest_index = 0
 		var smallest_diff = Vector2.INF
 		for i in range(resolutions.size()):
-			var diff = (resolutions[i] - Vector2(current_size)).length()
+			var diff = (resolutions[i] - Vector2i(current_size)).length()
 			if diff < smallest_diff.length():
 				smallest_diff = Vector2(diff, diff)
 				closest_index = i
@@ -69,30 +69,38 @@ func load_config() -> void:
 			if "audio" in loaded_config:
 				config.audio = loaded_config.audio
 
-func apply_config() -> void:
-	print("Applying config: ", config) # Debug print
+func update_video_settings(fullscreen: bool, resolution_index: int) -> void:
+	var mode_changed = config.video.fullscreen != fullscreen
+	var res_changed = config.video.resolution_index != resolution_index
 	
-	# Apply video settings
+	config.video.fullscreen = fullscreen
+	config.video.resolution_index = resolution_index
+	apply_config()
+	save_config()
+	
+	if mode_changed:
+		window_mode_changed.emit(fullscreen)
+	if res_changed:
+		resolution_changed.emit(Vector2(resolutions[resolution_index]))
+
+func apply_config() -> void:
 	if config.video.fullscreen:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		var resolution_index = config.video.resolution_index
-		if resolution_index >= 0 and resolution_index < resolutions.size():
-			DisplayServer.window_set_size(resolutions[resolution_index])
+		var resolution = resolutions[config.video.resolution_index]
+		DisplayServer.window_set_size(resolution)
+		
+		# Center the window
+		var screen_size = DisplayServer.screen_get_size()
+		var window_pos = (screen_size - resolution) / 2
+		DisplayServer.window_set_position(window_pos)
 	
 	# Apply audio settings
 	AudioServer.set_bus_volume_db(0, config.audio.master_volume)
 	AudioServer.set_bus_mute(0, config.audio.muted)
 
-func update_video_settings(fullscreen: bool, resolution_index: int) -> void:
-	print("Updating video settings - fullscreen: ", fullscreen, " resolution_index: ", resolution_index) # Debug print
-	config.video.fullscreen = fullscreen
-	config.video.resolution_index = resolution_index
-	save_config()
-
 func update_audio_settings(volume: float, muted: bool) -> void:
-	print("Updating audio settings - volume: ", volume, " muted: ", muted) # Debug print
 	config.audio.master_volume = volume
 	config.audio.muted = muted
 	save_config()

@@ -15,9 +15,18 @@ const UNKNOWN_COST = "?"
 const UNKNOWN_NAME = "???"
 const UNKNOWN_EFFECT = "????????????"
 
-func setup(data: Resource, starting_decoded_aspects: Dictionary = {}) -> void:
-	card_data = data
-	decoded_aspects = starting_decoded_aspects
+func _ready() -> void:
+	# Set fixed size for cards
+	custom_minimum_size = Vector2(200, 300)
+	size = Vector2(200, 300)
+	
+	# Center card contents
+	$MarginContainer.anchor_right = 1.0
+	$MarginContainer.anchor_bottom = 1.0
+	$MarginContainer.offset_right = 0
+	$MarginContainer.offset_bottom = 0
+	
+	# Update card display
 	update_display()
 
 func update_display() -> void:	
@@ -43,6 +52,10 @@ func update_display() -> void:
 
 func is_aspect_decoded(aspect: String) -> bool:
 	return decoded_aspects.get(aspect, false)
+	
+func setup(data: Resource, starting_decoded_aspects: Dictionary = {}) -> void:
+	card_data = data
+	decoded_aspects = starting_decoded_aspects
 
 func reveal_aspect(aspect: String) -> void:
 	print("Revealing " + aspect)

@@ -2,37 +2,27 @@
 
 [ext_resource type="Script" path="res://scripts/scenes/options_menu.gd" id="1_script"]
 
-[node name="OptionsMenu" type="Control"]
-layout_mode = 3
+[node name="OptionsMenu" type="CenterContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("1_script")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 color = Color(0, 0, 0, 0.5)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
-custom_minimum_size = Vector2(500, 400)
+custom_minimum_size = Vector2(800, 600)
 layout_mode = 2
-mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
 layout_mode = 2
@@ -52,19 +42,23 @@ metadata/_tab_index = 0
 
 [node name="FullscreenLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/TabContainer/Video"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Fullscreen"
 
 [node name="FullscreenToggle" type="CheckButton" parent="CenterContainer/PanelContainer/MarginContainer/TabContainer/Video"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 
 [node name="ResolutionLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/TabContainer/Video"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Resolution (Windowed Mode)"
 
 [node name="ResolutionOptionButton" type="OptionButton" parent="CenterContainer/PanelContainer/MarginContainer/TabContainer/Video"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 
 [node name="Audio" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/TabContainer"]
 visible = false
@@ -74,15 +68,28 @@ metadata/_tab_index = 1
 
 [node name="MuteLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/TabContainer/Audio"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Mute Audio"
 
 [node name="MuteToggle" type="CheckButton" parent="CenterContainer/PanelContainer/MarginContainer/TabContainer/Audio"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 
-[node name="VolumeLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/TabContainer/Audio"]
+[node name="VolumeContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/TabContainer/Audio"]
 layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/TabContainer/Audio/VolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
 text = "Master Volume"
+
+[node name="VolumeLabelValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/TabContainer/Audio/VolumeContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "100%"
 
 [node name="VolumeSlider" type="HSlider" parent="CenterContainer/PanelContainer/MarginContainer/TabContainer/Audio"]
 unique_name_in_owner = true
@@ -93,4 +100,5 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
 text = "Back"

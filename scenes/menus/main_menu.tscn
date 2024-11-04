@@ -4,8 +4,7 @@
 [ext_resource type="Script" path="res://scripts/systems/background_system.gd" id="2_bpmgo"]
 [ext_resource type="Script" path="res://scripts/systems/cutscene_system.gd" id="3_fo7iw"]
 
-[node name="MainMenu" type="Control"]
-layout_mode = 3
+[node name="MainMenu" type="CenterContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,13 +13,7 @@ grow_vertical = 2
 script = ExtResource("1_prvtn")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-z_index = 100
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
@@ -28,33 +21,37 @@ theme_override_constants/separation = 20
 
 [node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 48
 text = "Card Game"
 horizontal_alignment = 1
 
 [node name="ContinueButton" type="Button" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 50)
+custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 120
+theme_override_font_sizes/font_size = 32
 disabled = true
 text = "Continue Game"
 
 [node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 50)
+custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 120
+theme_override_font_sizes/font_size = 32
 text = "New Game"
 
 [node name="Options" type="Button" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 50)
+custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 120
+theme_override_font_sizes/font_size = 32
 text = "Options"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 50)
+custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 120
+theme_override_font_sizes/font_size = 32
 text = "Quit"
 
 [node name="BackgroundSystem" type="Node" parent="."]
