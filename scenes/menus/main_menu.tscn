@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxru22786wp6n"]
+[gd_scene load_steps=4 format=3 uid="uid://calr6njx4n28q"]
 
 [ext_resource type="Script" path="res://scripts/scenes/main_menu.gd" id="1_prvtn"]
 [ext_resource type="Script" path="res://scripts/systems/background_system.gd" id="2_bpmgo"]
@@ -49,6 +49,7 @@ text = "New Game"
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 120
+disabled = true
 text = "Options"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
@@ -62,3 +63,6 @@ script = ExtResource("2_bpmgo")
 
 [node name="CutsceneSystem" type="Node" parent="."]
 script = ExtResource("3_fo7iw")
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]

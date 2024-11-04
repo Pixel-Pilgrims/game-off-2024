@@ -1,7 +1,8 @@
 # main_menu.gd
 extends Control
 
-const OPTIONS_SCENE = preload("res://scenes/menus/options_menu.tscn")
+const OPTIONS_SCENE = preload("res://scenes/menus/options_menu.tscn")# Scene paths
+const HOME_BASE_SCENE = "res://scenes/home_base/home_base.tscn"
 
 func _ready():
 	$CenterContainer/VBoxContainer/StartButton.pressed.connect(_on_start_pressed)
@@ -17,10 +18,13 @@ func _on_start_pressed():
 	disable_menu()
 	GameState.start_new_run()
 	var new_game_cutscene = load("res://resources/cutscenes/new_game/new_game_cutscene.tres")
-	$CutsceneSystem.play_cutscene(new_game_cutscene, start_combat)
+	$CutsceneSystem.play_cutscene(new_game_cutscene, go_to_home_base)
 	
 func start_combat() -> void:
 	get_node("/root/Main").start_combat()
+
+func go_to_home_base() -> void:
+	get_node("/root/Main").switch_to_home_base()
 
 func _on_quit_pressed():
 	print("quit pressed")
@@ -30,7 +34,7 @@ func _on_quit_pressed():
 func _on_continue_button_pressed() -> void:
 	print("continue pressed")
 	GameState.load_game()
-	start_combat()
+	go_to_home_base()
 
 func _on_options_pressed() -> void:
 	var options = OPTIONS_SCENE.instantiate()

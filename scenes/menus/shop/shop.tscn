@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://cndnjigot1as7"]
+
+[ext_resource type="Script" path="res://scripts/decipher_shop.gd" id="1_10ejr"]
+[ext_resource type="Texture2D" uid="uid://bt5ewnjcibmwy" path="res://assets/backgrounds/scroll_shop.png" id="1_56d1j"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_10ejr")
+
+[node name="ScrollShop" type="Sprite2D" parent="."]
+position = Vector2(781, 621)
+scale = Vector2(1.82265, 1.44989)
+texture = ExtResource("1_56d1j")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ScrollShop"]
+offset_left = -334.027
+offset_top = -288.69
+offset_right = 178.973
+offset_bottom = 332.31
+horizontal_scroll_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="ScrollShop/ScrollContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(500, 600)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DecipherPointsLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
