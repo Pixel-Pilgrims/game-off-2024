@@ -18,7 +18,7 @@ func _on_start_pressed():
 	disable_menu()
 	GameState.start_new_run()
 	var new_game_cutscene = load("res://resources/cutscenes/new_game/new_game_cutscene.tres")
-	$CutsceneSystem.play_cutscene(new_game_cutscene, start_ingame_tutorial)
+	CutsceneSystem.play_cutscene(new_game_cutscene, start_ingame_tutorial)
 	
 func start_ingame_tutorial() -> void:
 	var ingame_tutorial_adventure = load("res://resources/adventures/ingame_tutorial/adventure_map.tres")

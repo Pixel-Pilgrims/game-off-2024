@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="CombatEncounterNodeData" load_steps=5 format=3 uid="uid://dsohl2qco44tx"]
+[gd_resource type="Resource" script_class="CombatEncounterNodeData" load_steps=6 format=3 uid="uid://dsohl2qco44tx"]
 
 [ext_resource type="Script" path="res://scripts/data/encounter_node_data.gd" id="1_w06wc"]
 [ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="2_7oxnr"]
 [ext_resource type="Resource" uid="uid://b61wo0msir67x" path="res://resources/adventures/ingame_tutorial/1_combat.tres" id="2_lvvpg"]
 [ext_resource type="Script" path="res://scripts/data/combat_encounter_node_data.gd" id="3_1bpls"]
+[ext_resource type="Resource" uid="uid://bjkxuf2s1608i" path="res://resources/enemies/cultist.tres" id="4_sukwl"]
 
 [resource]
 script = ExtResource("3_1bpls")
-enemies = Array[ExtResource("2_7oxnr")]([])
+enemies = Array[ExtResource("2_7oxnr")]([ExtResource("4_sukwl")])
 childNodes = Array[ExtResource("1_w06wc")]([ExtResource("2_lvvpg")])
 completed = false

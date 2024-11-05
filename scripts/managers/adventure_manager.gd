@@ -1,8 +1,8 @@
 extends Node
 
 @export var adventure: AdventureMapData
-@onready var adventureStagesContainer: HBoxContainer = $"../ScrollContainer/HBoxContainer/AdventureStages"
-@onready var lines_container: Node2D = $"../ScrollContainer/HBoxContainer/LinesContainer"
+@onready var adventureStagesContainer: HBoxContainer = $"../ScrollContainer/AdventureStages"
+@onready var lines_container: Node2D = $"../ScrollContainer/LinesContainer"
 
 const NODE_SCENE = preload("res://scenes/encounter_node.tscn")
 @export var COLUMN_SPACING = 200
@@ -12,7 +12,7 @@ const NODE_SCENE = preload("res://scenes/encounter_node.tscn")
 @export var DASH_LENGTH: float = 10.0
 @export var GAP_LENGTH: float = 10.0
 
-func init_adventure_from_resource(adventureResource: AdventureMapData) -> void:
+func init_adventure(adventureResource: AdventureMapData) -> void:
 	adventure = adventureResource
 	drawMap()
 

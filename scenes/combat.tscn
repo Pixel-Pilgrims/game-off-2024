@@ -1,14 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c8frb1w88o0u0"]
+[gd_scene load_steps=7 format=3 uid="uid://b3l57gnlln63g"]
 
 [ext_resource type="Script" path="res://scripts/scenes/combat.gd" id="1_n5yyl"]
 [ext_resource type="Script" path="res://scripts/managers/combat_manager.gd" id="2_305ab"]
 [ext_resource type="Script" path="res://scripts/managers/hand_manager.gd" id="3_bdk6y"]
-[ext_resource type="Script" path="res://scripts/managers/decoder_manager.gd" id="4_vgm5a"]
 [ext_resource type="Script" path="res://scripts/managers/pause_manager.gd" id="5_pl43j"]
-[ext_resource type="Script" path="res://scripts/systems/background_system.gd" id="6_l1wfx"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="7_dwwk6"]
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="8_grmhu"]
-[ext_resource type="PackedScene" uid="uid://duyk27ghemr8s" path="res://scenes/decode_ui.tscn" id="9_1iax2"]
 [ext_resource type="Texture2D" uid="uid://dyx76tn885md3" path="res://assets/ui/energy_orb.png" id="9_e0ys4"]
 
 [node name="Combat" type="Node2D"]
@@ -20,14 +16,29 @@ script = ExtResource("2_305ab")
 [node name="HandManager" type="Node" parent="."]
 script = ExtResource("3_bdk6y")
 
-[node name="DecoderManager" type="Node" parent="."]
-script = ExtResource("4_vgm5a")
-
 [node name="PauseManager" type="Node" parent="."]
 script = ExtResource("5_pl43j")
 
-[node name="BackgroundSystem" type="Node" parent="."]
-script = ExtResource("6_l1wfx")
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(300, 300)
+script = ExtResource("7_dwwk6")
+
+[node name="Visual" type="ColorRect" parent="Player"]
+offset_right = 100.0
+offset_bottom = 100.0
+color = Color(0, 1, 0, 1)
+
+[node name="HealthLabel" type="Label" parent="Player"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 70
+text = "40/40"
+
+[node name="EnemiesContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 20
+alignment = 1
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -105,35 +116,3 @@ theme_override_font_sizes/font_size = 140
 text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="DecodeUI" parent="UI" instance=ExtResource("9_1iax2")]
-
-[node name="Player" type="Node2D" parent="."]
-position = Vector2(300, 300)
-script = ExtResource("7_dwwk6")
-
-[node name="Visual" type="ColorRect" parent="Player"]
-offset_right = 100.0
-offset_bottom = 100.0
-color = Color(0, 1, 0, 1)
-
-[node name="HealthLabel" type="Label" parent="Player"]
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_font_sizes/font_size = 70
-text = "40/40"
-
-[node name="Enemy" type="Node2D" parent="."]
-position = Vector2(700, 300)
-script = ExtResource("8_grmhu")
-
-[node name="Visual" type="ColorRect" parent="Enemy"]
-offset_right = 100.0
-offset_bottom = 100.0
-color = Color(1, 0, 0, 1)
-
-[node name="HealthLabel" type="Label" parent="Enemy"]
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_font_sizes/font_size = 70
-text = "30/30"

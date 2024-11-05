@@ -11,15 +11,6 @@ func setup_background():
 	# Create a TextureRect node as the background
 	var background = TextureRect.new()
 	
-	# Set it to fill the entire viewport
-	background.set_anchors_preset(Control.PRESET_FULL_RECT)
-	
-	# Make sure it stays behind other elements
-	background.z_index = -1
-	
-	# Ignore mouse input so controls underneath work
-	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
 	# Get the parent scene name directly
 	var current_scene = get_parent().name
 	print("Current scene: ", current_scene)  # Debug print
@@ -29,9 +20,22 @@ func setup_background():
 		background.texture = MAIN_MENU_BG
 	elif current_scene == "Combat":
 		background.texture = COMBAT_BG
+	else:
+		background = ColorRect.new()
+		background.color = Color.AQUAMARINE
 	
-	# Set the stretch mode to cover the entire area while maintaining aspect ratio
-	background.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	if background is TextureRect:
+		# Set the stretch mode to cover the entire area while maintaining aspect ratio
+		background.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	
+		# Set it to fill the entire viewport
+	background.set_anchors_preset(Control.PRESET_FULL_RECT)
+	
+	# Make sure it stays behind other elements
+	background.z_index = -1
+	
+	# Ignore mouse input so controls underneath work
+	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 	# Add the background as the first child
 	add_child(background)

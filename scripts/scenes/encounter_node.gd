@@ -21,36 +21,49 @@ func _ready() -> void:
 	gui_input.connect(_on_gui_input)
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
+	
+	# If we were set up before _ready, update appearance now
+	if node_data:
+		update_appearance()
 
 func setup(data: EncounterNodeData) -> void:
 	node_data = data
-	update_appearance()
+	if is_node_ready():
+		update_appearance()
 
 func get_node_data() -> EncounterNodeData:
 	return node_data
 
 func set_start_node() -> void:
+	if not is_node_ready():
+		await ready
 	circle.color = START_NODE_COLOR
 	label.text = "Start"
 
 func set_finish_node() -> void:
+	if not is_node_ready():
+		await ready
 	circle.color = FINISH_NODE_COLOR
 	label.text = "Final"
 
 func set_completed() -> void:
+	if not is_node_ready():
+		await ready
 	circle.color = COMPLETED_COLOR
 
 func update_appearance() -> void:
+	if not is_node_ready():
+		await ready
+		
 	if node_data.completed:
 		set_completed()
-	
-	if node_data is StartEncounterNodeData:
+	elif node_data is StartEncounterNodeData:
 		set_start_node()
 	elif node_data is FinishEncounterNodeData:
 		set_finish_node()
 	else:
-		label.text = "Encounter"
 		circle.color = BASE_NODE_COLOR
+		label.text = "Encounter"
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:

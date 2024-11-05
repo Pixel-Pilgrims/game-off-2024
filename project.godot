@@ -24,6 +24,8 @@ config/features=PackedStringArray("4.3", "GL Compatibility")
 ConfigManager="*res://scripts/managers/config_manager.gd"
 GameState="*res://scripts/autoload/game_state.gd"
 AdventureSystem="*res://scripts/systems/adventure_system.gd"
+BackgroundSystem="*res://scripts/systems/background_system.gd"
+CutsceneSystem="*res://scripts/systems/cutscene_system.gd"
 
 [display]
 

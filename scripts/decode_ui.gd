@@ -16,11 +16,6 @@ const COSTS = {
 
 func _ready() -> void:
 	hide()
-	update_points()
-
-func update_points() -> void:
-	var decoder = get_node("/root/Main/Combat/DecoderManager")
-	decode_points_label.text = "Decode Points: %d" % decoder.available_points
 
 func show_for_card(card: Node) -> void:
 	# Clear previous options

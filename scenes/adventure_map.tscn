@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://ffxbow25onke"]
+[gd_scene load_steps=2 format=3 uid="uid://b7vx0syoj8olw"]
 
 [ext_resource type="Script" path="res://scripts/managers/adventure_manager.gd" id="1_ryxis"]
 

@@ -7,4 +7,4 @@
 [resource]
 script = ExtResource("2_r3cwx")
 childNodes = Array[ExtResource("1_72qi4")]([ExtResource("2_y55f8")])
-completed = false
+completed = true

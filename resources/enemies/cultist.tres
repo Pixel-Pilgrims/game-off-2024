@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://bjkxuf2s1608i"]
+
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1_g2v6o"]
+[ext_resource type="PackedScene" uid="uid://cbtac01eivwim" path="res://scenes/enemies/cultist.tscn" id="1_uchoq"]
+
+[resource]
+script = ExtResource("1_g2v6o")
+enemy_scene = ExtResource("1_uchoq")
+health = 10
+abilities = []
