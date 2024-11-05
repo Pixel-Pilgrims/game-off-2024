@@ -18,10 +18,16 @@ func _on_start_pressed():
 	disable_menu()
 	GameState.start_new_run()
 	var new_game_cutscene = load("res://resources/cutscenes/new_game/new_game_cutscene.tres")
-	$CutsceneSystem.play_cutscene(new_game_cutscene, start_combat)
+	$CutsceneSystem.play_cutscene(new_game_cutscene, start_ingame_tutorial)
 	
-func start_combat() -> void:
-	get_node("/root/Main").start_combat()
+func start_ingame_tutorial() -> void:
+	var ingame_tutorial_adventure = load("res://resources/adventures/ingame_tutorial/adventure_map.tres")
+	AdventureSystem.start_adventure(ingame_tutorial_adventure)
+	AdventureSystem.adventure_completed.connect(_on_ingame_tutorial_completed)
+	
+func _on_ingame_tutorial_completed(adventure: AdventureMapData):
+	get_node("/root/Main").start_home_base()
+	
 
 func _on_quit_pressed():
 	print("quit pressed")

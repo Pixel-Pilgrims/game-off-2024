@@ -1,4 +1,3 @@
-# decoder_manager.gd
 extends Node
 
 signal aspect_decoded(card_id: String, aspect: String)
