@@ -9,8 +9,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1780.0
-offset_bottom = -940.0
+offset_right = -1740.0
+offset_bottom = -900.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6g2l7")
@@ -34,6 +34,7 @@ layout_mode = 2
 [node name="Circle" type="ColorRect" parent="CenterContainer/VBoxContainer/CenterContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+mouse_filter = 1
 script = ExtResource("2_kg7rm")
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
