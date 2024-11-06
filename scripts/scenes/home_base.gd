@@ -1,5 +1,10 @@
 extends Control
 
+
+
+func _ready() -> void:
+	BackgroundSystem.setup_background(load("res://assets/backgrounds/study.png"))
+
 func _on_adventure_button_pressed() -> void:
 	pass # Go to run tree
 
