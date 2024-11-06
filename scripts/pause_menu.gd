@@ -5,12 +5,17 @@ signal quit_pressed
 
 func _ready() -> void:
 	hide()
-	$PanelContainer/MarginContainer/VBoxContainer/ResumeButton.pressed.connect(_on_resume_pressed)
-	$PanelContainer/MarginContainer/VBoxContainer/QuitButton.pressed.connect(_on_quit_pressed)
+	# Connect button signals
+	var resume_button = $PanelContainer/MarginContainer/VBoxContainer/ResumeButton
+	var quit_button = $PanelContainer/MarginContainer/VBoxContainer/QuitButton
+	
+	if not resume_button.pressed.is_connected(_on_resume_pressed):
+		resume_button.pressed.connect(_on_resume_pressed)
+	if not quit_button.pressed.is_connected(_on_quit_pressed):
+		quit_button.pressed.connect(_on_quit_pressed)
 
 func _on_resume_pressed() -> void:
 	resume_pressed.emit()
-	hide()
 
 func _on_quit_pressed() -> void:
 	quit_pressed.emit()

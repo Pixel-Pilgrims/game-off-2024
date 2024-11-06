@@ -28,7 +28,7 @@ func _ready() -> void:
 	# Update card display
 	update_display()
 
-func update_display() -> void:	
+func update_display() -> void:    
 	if not is_node_ready():
 		await ready
 	# Cost display
@@ -80,28 +80,32 @@ func _gui_input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			show_decode_menu()
 		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			var combat_manager = get_node("/root/Combat/CombatManager")
+			var combat_scene = get_node("/root/Main/Combat")
+			var combat_manager = combat_scene.get_node("CombatManager")
 			if combat_manager and combat_manager.can_play_card(card_data.energy_cost):
 				play_card()
 
 func play_card() -> void:
-	var combat_manager = get_node("/root/Combat/CombatManager")
+	var combat_scene = get_node("/root/Main/Combat")
+	var combat_manager = combat_scene.get_node("CombatManager")
 	combat_manager.spend_energy(card_data.energy_cost)
 	execute_effect()
 	card_played.emit(self)
 	queue_free()
 
 func execute_effect() -> void:
+	var combat_scene = get_node("/root/Main/Combat")
+	
 	match card_data.card_type:
 		"attack":
-			var enemies_container = get_node("/root/Combat/EnemiesContainer")
+			var enemies_container = combat_scene.get_node("EnemiesContainer")
 			if enemies_container and enemies_container.get_child_count() > 0:
 				# For now, just target the first enemy
 				# You might want to implement target selection later
 				var enemy = enemies_container.get_child(0)
 				enemy.take_damage(get_effect_value())
 		"block":
-			var player = get_node("/root/Combat/Player")
+			var player = combat_scene.get_node("Player")
 			if player:
 				player.gain_block(get_effect_value())
 
@@ -128,7 +132,8 @@ func show_decode_menu() -> void:
 	popup.popup()
 	
 func _on_decode_option_selected(id: int) -> void:
-	var decoder = get_node("/root/Combat/DecoderManager")
+	var combat_scene = get_node("/root/Main/Combat")
+	var decoder = combat_scene.get_node("DecoderManager")
 	match id:
 		0: decoder.decode_aspect(self, "cost")
 		1: decoder.decode_aspect(self, "type")

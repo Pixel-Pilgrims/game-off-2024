@@ -42,6 +42,10 @@ enabled=PackedStringArray()
 config/itch_username=""
 config/itch_project_name=""
 
+[global_group]
+
+encounter_nodes="All currently present encounter nodes"
+
 [maaacks_options_menus]
 
 disable_plugin_dialogues=true

@@ -12,8 +12,9 @@ const NODE_SCENE = preload("res://scenes/encounter_node.tscn")
 @export var DASH_LENGTH: float = 10.0
 @export var GAP_LENGTH: float = 10.0
 
-func init_adventure(adventureResource: AdventureMapData) -> void:
+func init_adventure(adventureResource: AdventureMapData):
 	adventure = adventureResource
+	BackgroundSystem.setup_background(null)
 	drawMap()
 
 func drawMap() -> void:

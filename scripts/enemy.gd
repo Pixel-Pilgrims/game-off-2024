@@ -16,7 +16,7 @@ func take_damage(amount: int) -> void:
 
 func take_turn() -> void:
 	print("Enemy turn")
-	var player = get_node("/root/Combat/Player")
+	var player = get_node("/root/Main/Combat/Player")
 	if player:
 		# This will be replaced with actual ability usage
 		pass

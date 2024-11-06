@@ -20,7 +20,7 @@ script = ExtResource("3_bdk6y")
 script = ExtResource("5_pl43j")
 
 [node name="Player" type="Node2D" parent="."]
-position = Vector2(300, 300)
+position = Vector2(300, 420)
 script = ExtResource("7_dwwk6")
 
 [node name="Visual" type="ColorRect" parent="Player"]
@@ -34,11 +34,8 @@ offset_bottom = 23.0
 theme_override_font_sizes/font_size = 70
 text = "40/40"
 
-[node name="EnemiesContainer" type="HBoxContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/separation = 20
-alignment = 1
+[node name="EnemiesContainer" type="Node2D" parent="."]
+position = Vector2(1200, 420)
 
 [node name="UI" type="CanvasLayer" parent="."]
 

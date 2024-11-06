@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/scenes/encounter_node.gd" id="1_6g2l7"]
 [ext_resource type="Script" path="res://scripts/utils/circle.gd" id="2_kg7rm"]
 
-[node name="EncounterNode" type="Control"]
+[node name="EncounterNode" type="Control" groups=["encounter_nodes"]]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 3
 anchors_preset = 15

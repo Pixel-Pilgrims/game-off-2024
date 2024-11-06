@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bnk32gyp3bsir"]
 
-[ext_resource type="Script" path="res://scripts/scenes/home_base.gd" id="1_4udhq"]
-[ext_resource type="Script" path="res://scripts/managers/pause_manager.gd" id="2_4gf2c"]
+[ext_resource type="Script" path="res://scripts/scenes/home_base.gd" id="1_07xob"]
+[ext_resource type="Script" path="res://scripts/managers/pause_manager.gd" id="2_5cg8f"]
 
 [node name="HomeBase" type="Control"]
 layout_mode = 3
@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_4udhq")
+script = ExtResource("1_07xob")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -59,7 +59,7 @@ theme_override_font_sizes/font_size = 87
 text = "Deck and inventory"
 
 [node name="PauseManager" type="Node" parent="."]
-script = ExtResource("2_4gf2c")
+script = ExtResource("2_5cg8f")
 
 [connection signal="pressed" from="VBoxContainer/GridContainer/AdventureButton" to="." method="_on_adventure_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/DecoderButton" to="." method="_on_decoder_button_pressed"]
