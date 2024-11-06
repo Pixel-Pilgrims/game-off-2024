@@ -15,7 +15,7 @@ llm_api="ollama_api"
 
 [application]
 
-config/name="New Game Project"
+config/name="Whisperstone"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 
