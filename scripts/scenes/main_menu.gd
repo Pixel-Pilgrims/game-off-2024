@@ -11,17 +11,14 @@ func _ready():
 	$CenterContainer/VBoxContainer/QuitButton.pressed.connect(_on_quit_pressed)
 	# Enable menu when it's first shown
 	enable_menu()
+	BackgroundSystem.setup_for_scene(name)
 
 func _on_start_pressed():
 	print("start pressed")
 	# Disable menu interaction before starting cutscene
 	disable_menu()
-	GameState.start_new_run()
-	var new_game_cutscene = load("res://resources/cutscenes/new_game/new_game_cutscene.tres")
-	$CutsceneSystem.play_cutscene(new_game_cutscene, start_combat)
-	
-func start_combat() -> void:
-	get_node("/root/Main").start_combat()
+	# Tell the main scene to handle the new game sequence
+	get_node("/root/Main").handle_new_game()
 
 func _on_quit_pressed():
 	print("quit pressed")

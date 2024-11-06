@@ -32,6 +32,18 @@ func _ready() -> void:
 	energy_container.anchor_right = 1.0
 	
 	$UI/HUD/EndTurnMarginContainer/EndTurnButton.pressed.connect(_on_end_turn_pressed)
+	
+	# Connect to enemy death or victory condition
+	$EnemiesContainer.child_exiting_tree.connect(_check_combat_state)
+
+func _check_combat_state(_node) -> void:
+	# If all enemies are dead
+	if $EnemiesContainer.get_child_count() <= 1:  # <= 1 because the signal fires before the node is fully removed
+		_on_combat_won()
+
+func _on_combat_won() -> void:
+	AdventureSystem.complete_current_encounter()
+	queue_free()
 
 func _on_end_turn_pressed() -> void:
 	combat_manager.end_turn()

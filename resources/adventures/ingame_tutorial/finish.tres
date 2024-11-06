@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FinishEncounterNodeData" load_steps=3 format=3 uid="uid://h7ww7yma5ddj"]
+
+[ext_resource type="Script" path="res://scripts/data/encounter_node_data.gd" id="1_h5xn1"]
+[ext_resource type="Script" path="res://scripts/data/finish_encounter_node_data.gd" id="2_isi6o"]
+
+[resource]
+script = ExtResource("2_isi6o")
+childNodes = Array[ExtResource("1_h5xn1")]([])
+completed = false

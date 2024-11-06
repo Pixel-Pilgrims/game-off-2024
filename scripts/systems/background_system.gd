@@ -4,35 +4,53 @@ extends Node
 const MAIN_MENU_BG = preload("res://assets/backgrounds/main_menu_bg.webp")
 const COMBAT_BG = preload("res://assets/backgrounds/combat_bg.png")
 
-func _ready():
-	setup_background()
+var current_background: Control
 
-func setup_background():
-	# Create a TextureRect node as the background
-	var background = TextureRect.new()
+func setup_for_scene(scene_type: String) -> void:
+	print("Background System: Setting up background for ", scene_type)
 	
-	# Set it to fill the entire viewport
+	var background: Control
+	
+	match scene_type:
+		"MainMenu":
+			background = TextureRect.new()
+			background.texture = MAIN_MENU_BG
+		"Combat":
+			background = TextureRect.new()
+			background.texture = COMBAT_BG
+		_:
+			background = ColorRect.new()
+			background.color = Color.DARK_TURQUOISE
+	
+	if background is TextureRect:
+		background.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	
 	background.set_anchors_preset(Control.PRESET_FULL_RECT)
-	
-	# Make sure it stays behind other elements
 	background.z_index = -1
-	
-	# Ignore mouse input so controls underneath work
 	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
-	# Get the parent scene name directly
-	var current_scene = get_parent().name
-	print("Current scene: ", current_scene)  # Debug print
-	
-	# Set the texture based on the current scene
-	if current_scene == "MainMenu":
-		background.texture = MAIN_MENU_BG
-	elif current_scene == "Combat":
-		background.texture = COMBAT_BG
-	
-	# Set the stretch mode to cover the entire area while maintaining aspect ratio
-	background.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-	
-	# Add the background as the first child
 	add_child(background)
-	move_child(background, 0)
+	current_background = background
+	
+func setup_background(backgroundResource: Resource) -> void:
+	print("Background System: Setting up background for encounter")
+	
+	var background: Control
+	
+	var encounterBackground = backgroundResource
+	if encounterBackground:
+		background = TextureRect.new()
+		background.texture = encounterBackground
+	else:
+		background = ColorRect.new()
+		background.color = Color.DARK_TURQUOISE
+	
+	if background is TextureRect:
+		background.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	
+	background.set_anchors_preset(Control.PRESET_FULL_RECT)
+	background.z_index = -1
+	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	add_child(background)
+	current_background = background

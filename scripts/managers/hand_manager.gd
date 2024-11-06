@@ -1,4 +1,3 @@
-# hand_manager.gd
 extends Node
 
 const CARD_SCENE = preload("res://scenes/card.tscn")

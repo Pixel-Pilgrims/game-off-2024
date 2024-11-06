@@ -16,3 +16,6 @@ mono_crash.*.json
 
 # Mac-specific ignores
 .DS_Store
+
+# Repomix-specific ignores
+repomix-output.txt

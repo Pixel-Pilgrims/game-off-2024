@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="StartEncounterNodeData" load_steps=4 format=3 uid="uid://cldmpsek0wxvd"]
+
+[ext_resource type="Script" path="res://scripts/data/encounter_node_data.gd" id="1_72qi4"]
+[ext_resource type="Script" path="res://scripts/data/start_encounter_node_data.gd" id="2_r3cwx"]
+[ext_resource type="Resource" uid="uid://dsohl2qco44tx" path="res://resources/adventures/ingame_tutorial/0_combat.tres" id="2_y55f8"]
+
+[resource]
+script = ExtResource("2_r3cwx")
+childNodes = Array[ExtResource("1_72qi4")]([ExtResource("2_y55f8")])
+completed = true

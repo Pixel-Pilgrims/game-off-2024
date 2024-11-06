@@ -5,7 +5,7 @@ var max_energy: int = 3
 var is_player_turn: bool = true
 
 @onready var hand_manager: Node = $"../HandManager"
-@onready var enemy: Node = $"../Enemy"
+@onready var enemies_container: Node = $"../EnemiesContainer" 
 @onready var energy_label: Label = $"../UI/HUD/EnergyMarginContainer/EnergyTexture/EnergyLabel"
 
 func _ready() -> void:
@@ -22,8 +22,12 @@ func start_turn() -> void:
 func end_turn() -> void:
 	hand_manager.discard_hand()
 	is_player_turn = false
-	# Enemy turn
-	enemy.take_turn()
+
+	# Enemy turns
+	for enemy in enemies_container.get_children():
+		if enemy.has_method("take_turn"):
+			enemy.take_turn()
+
 	# Back to player
 	start_turn()
 
