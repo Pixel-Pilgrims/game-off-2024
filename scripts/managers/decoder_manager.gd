@@ -4,12 +4,12 @@ extends Node
 signal aspect_decoded(card_id: String, aspect: String)
 signal points_changed(new_amount: int)
 
-var available_points: int = 10  # Start with some points for testing
+var available_points: int = 30  # Start with some points for testing
 
 const DECODE_COSTS = {
 	"cost": 2,
 	"type": 3,
-	"value": 4,
+	"name": 4,
 	"description": 5
 }
 
@@ -30,9 +30,17 @@ func decode_aspect(card: Node, aspect: String) -> void:
 	available_points -= cost
 	points_changed.emit(available_points)
 	
+	# Get card_id from the resource_path or card_path property
+	var card_id: String
+	if card.has_method("get_card_path"):
+		card_id = card.get_card_path()
+	else:
+		push_error("Card node doesn't have required get_card_path method")
+		return
+	
 	# Store the decoded information
-	var card_id = card.card_data.resource_path
-	GameState.decoded_aspects[card_id] = GameState.decoded_aspects.get(card_id, {})
+	if not GameState.decoded_aspects.has(card_id):
+		GameState.decoded_aspects[card_id] = {}
 	GameState.decoded_aspects[card_id][aspect] = true
 	
 	# Update card display
@@ -40,8 +48,8 @@ func decode_aspect(card: Node, aspect: String) -> void:
 	aspect_decoded.emit(card_id, aspect)
 	
 	# Update decode UI if it's visible
-	var decode_ui = get_node("/root/Main/Combat/UI/DecodeUI")
-	if decode_ui and decode_ui.visible:
+	var decode_ui = get_node_or_null("/root/Main/Combat/UI/DecodeUI")
+	if decode_ui and decode_ui.visible and decode_ui.has_method("update_points"):
 		decode_ui.update_points()
 
 func add_points(amount: int) -> void:

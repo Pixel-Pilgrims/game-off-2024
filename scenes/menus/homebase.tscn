@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://byo532vrjst66"]
+
+[ext_resource type="Texture2D" uid="uid://bt5ewnjcibmwy" path="res://assets/backgrounds/scroll_shop.png" id="1_3tyo8"]
+[ext_resource type="Script" path="res://scripts/decipher_shop.gd" id="1_nb7pg"]
+[ext_resource type="PackedScene" uid="uid://cndnjigot1as7" path="res://scenes/menus/shop/shop.tscn" id="3_o3ftp"]
+
+[node name="Homebase" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nb7pg")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -233.0
+offset_top = 8.0
+offset_right = 16.0
+offset_bottom = 148.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_3tyo8")
+expand_mode = 2
+
+[node name="PlayerStats" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -293.0
+offset_top = 39.0
+offset_right = -89.0
+offset_bottom = 142.0
+grow_horizontal = 0
+scale = Vector2(1.5761, 1.63794)
+text = "HP: 40/40
+Gold: 100
+Decipher Points: 10"
+
+[node name="DecipherShop" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" parent="DecipherShop" instance=ExtResource("3_o3ftp")]
+layout_mode = 1

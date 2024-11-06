@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cndnjigot1as7"]
+[gd_scene load_steps=4 format=3 uid="uid://cndnjigot1as7"]
 
 [ext_resource type="Script" path="res://scripts/decipher_shop.gd" id="1_10ejr"]
 [ext_resource type="Texture2D" uid="uid://bt5ewnjcibmwy" path="res://assets/backgrounds/scroll_shop.png" id="1_56d1j"]
+[ext_resource type="Script" path="res://scripts/managers/decoder_manager.gd" id="3_bo20c"]
 
-[node name="Control" type="Control"]
+[node name="DecipherUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,24 +14,39 @@ grow_vertical = 2
 script = ExtResource("1_10ejr")
 
 [node name="ScrollShop" type="Sprite2D" parent="."]
-position = Vector2(781, 621)
-scale = Vector2(1.82265, 1.44989)
+position = Vector2(780, 613)
+scale = Vector2(1.89022, 1.49542)
 texture = ExtResource("1_56d1j")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ScrollShop"]
-offset_left = -334.027
-offset_top = -288.69
-offset_right = 178.973
-offset_bottom = 332.31
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -370.0
+offset_top = -316.0
+offset_right = -1021.0
+offset_bottom = -464.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="GridContainer" type="GridContainer" parent="ScrollShop/ScrollContainer"]
 clip_contents = true
-custom_minimum_size = Vector2(500, 600)
 layout_mode = 2
-size_flags_horizontal = 3
+columns = 3
 
 [node name="DecipherPointsLabel" type="Label" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -170.0
+offset_top = 50.0
+offset_right = -111.0
+offset_bottom = 86.0
+grow_horizontal = 0
+
+[node name="DecoderManager" type="Node" parent="."]
+script = ExtResource("3_bo20c")

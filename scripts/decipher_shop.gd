@@ -1,17 +1,18 @@
-# decipher_shop.gd
 extends Control
 
+# First, move the shop card script to a constant reference
+const ShopCardScript = preload("res://scripts/scenes/decipher_shop_card.gd")
+
 @onready var grid_container = $ScrollShop/ScrollContainer/GridContainer
+@onready var scroll_container = $ScrollShop/ScrollContainer
 @onready var card_scene = preload("res://scenes/card.tscn")
 @onready var points_label = $DecipherPointsLabel
-@onready var decoder_manager = get_node("/root/Main/DecoderManager")
+@onready var decoder_manager = $DecoderManager
 
 # Cards available for deciphering
-var available_cards = [
-	"res://resources/cards/attack_card.tres",
-	"res://resources/cards/block_card.tres",
-	# Add initial cards available in shop
-]
+var available_cards = GameState.current_deck
+
+var card_size: Vector2
 
 func _ready() -> void:
 	setup_grid_container()
@@ -23,9 +24,25 @@ func _ready() -> void:
 	decoder_manager.aspect_decoded.connect(_on_aspect_decoded)
 
 func setup_grid_container() -> void:
+	# Configure grid layout
 	grid_container.columns = 3
-	grid_container.add_theme_constant_override("h_separation", 10)
-	grid_container.add_theme_constant_override("v_separation", 10)
+	grid_container.add_theme_constant_override("h_separation", 20)
+	grid_container.add_theme_constant_override("v_separation", 20)
+	
+	# Make GridContainer take full width
+	grid_container.size_flags_horizontal = Control.SIZE_EXPAND | Control.SIZE_FILL
+	
+	# Calculate card sizes based on scroll container width
+	var available_width = scroll_container.size.x
+	var card_width = (available_width - (grid_container.columns - 1) * grid_container.get_theme_constant("h_separation")) / grid_container.columns
+	card_size = Vector2(card_width, card_width * 1.5)
+	
+	# Calculate total height needed
+	var rows = ceil(float(available_cards.size()) / grid_container.columns)
+	var total_height = (card_size.y * rows) + ((rows - 1) * grid_container.get_theme_constant("v_separation"))
+	
+	# Set GridContainer size
+	grid_container.custom_minimum_size = Vector2(available_width, total_height)
 
 func populate_shop_cards() -> void:
 	# Clear existing cards
@@ -37,17 +54,26 @@ func populate_shop_cards() -> void:
 		var card_resource = load(card_path)
 		if card_resource:
 			var card_instance = card_scene.instantiate()
+		
+			# Set the script before setup
+			card_instance.set_script(ShopCardScript)
+			
 			grid_container.add_child(card_instance)
+			
+			# Set the card's custom minimum size
+			card_instance.custom_minimum_size = card_size - Vector2(-10, -30)
+			
+			# Make the card expand to fill its cell
+			card_instance.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+			card_instance.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 			
 			# Get decoded aspects for this card from GameState
 			var decoded_aspects = GameState.decoded_aspects.get(card_path, {})
 			
-			# Setup the card with its resource and decoded aspects
-			card_instance.setup(card_resource, decoded_aspects)
+			# Set up the card with both resource and decoder manager
+			if card_instance.has_method("setup_shop_card"):
+				card_instance.setup_shop_card(card_resource, decoded_aspects, decoder_manager)
 			
-			# Override the card script for shop functionality
-			card_instance.set_script(DecipherShopCardScript)
-
 func update_points_display() -> void:
 	points_label.text = "Decipher Points: " + str(decoder_manager.available_points)
 
@@ -57,75 +83,3 @@ func _on_points_changed(new_amount: int) -> void:
 func _on_aspect_decoded(_card_id: String, _aspect: String) -> void:
 	# Refresh the cards to show updated decode status
 	populate_shop_cards()
-
-# Extended card script for shop cards
-class DecipherShopCardScript extends "res://scripts/scenes/card.gd":
-	# Override _gui_input to only handle decoding
-	func _gui_input(event: InputEvent) -> void:
-		if event is InputEventMouseButton:
-			if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-				show_decode_menu()
-	
-	# Override play_card to do nothing
-	func play_card() -> void:
-		pass
-	
-	# Override execute_effect to do nothing
-	func execute_effect() -> void:
-		pass
-	
-	# Modified show_decode_menu for shop context
-	func show_decode_menu() -> void:
-		var popup = PopupMenu.new()
-		add_child(popup)
-		
-		var decoder_manager = get_node("/root/Main/DecoderManager")
-		var points_available = decoder_manager.available_points
-		
-		popup.add_item("Available Points: " + str(points_available))
-		popup.set_item_disabled(0, true)
-		popup.add_separator()
-		
-		# Add available decipher options
-		if not is_aspect_decoded("cost"):
-			var cost = decoder_manager.DECODE_COSTS["cost"]
-			popup.add_item("Decipher Cost (%d points)" % cost, 0)
-			popup.set_item_disabled(popup.item_count - 1, not decoder_manager.can_decode_aspect("cost"))
-		
-		if not is_aspect_decoded("type"):
-			var cost = decoder_manager.DECODE_COSTS["type"]
-			popup.add_item("Decipher Type (%d points)" % cost, 1)
-			popup.set_item_disabled(popup.item_count - 1, not decoder_manager.can_decode_aspect("type"))
-		
-		if not is_aspect_decoded("value"):
-			var cost = decoder_manager.DECODE_COSTS["value"]
-			popup.add_item("Decipher Value (%d points)" % cost, 2)
-			popup.set_item_disabled(popup.item_count - 1, not decoder_manager.can_decode_aspect("value"))
-		
-		if not is_aspect_decoded("description"):
-			var cost = decoder_manager.DECODE_COSTS["description"]
-			popup.add_item("Decipher Description (%d points)" % cost, 3)
-			popup.set_item_disabled(popup.item_count - 1, not decoder_manager.can_decode_aspect("description"))
-		
-		if popup.item_count == 2: # Only the points display and separator
-			popup.add_item("Fully Deciphered", -1)
-			popup.set_item_disabled(popup.item_count - 1, true)
-		
-		popup.id_pressed.connect(_on_decode_option_selected)
-		popup.position = get_global_mouse_position()
-		popup.popup()
-	
-	# Modified decode option handling to use decoder_manager
-	func _on_decode_option_selected(id: int) -> void:
-		var decoder_manager = get_node("/root/Main/DecoderManager")
-		var aspect_map = {
-			0: "cost",
-			1: "type",
-			2: "value",
-			3: "description"
-		}
-		
-		if aspect_map.has(id):
-			var aspect = aspect_map[id]
-			if decoder_manager.can_decode_aspect(aspect):
-				decoder_manager.decode_aspect(self, aspect)

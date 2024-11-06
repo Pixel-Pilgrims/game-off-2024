@@ -4,7 +4,7 @@ extends Node
 var current_scene: Node = null
 @onready var main_menu_scene = preload("res://scenes/menus/main_menu.tscn")
 @onready var combat_scene = preload("res://scenes/Combat.tscn")
-@onready var home_base_scene = preload("res://scenes/menus/homebase/homebase.tscn")
+@onready var home_base_scene = preload("res://scenes/menus/shop/shop.tscn")
 
 func _ready():
 	# Ensure config is applied before showing the menu
@@ -14,7 +14,7 @@ func _ready():
 func show_main_menu():
 	if current_scene:
 		current_scene.queue_free()
-	current_scene = menu_scene.instantiate()
+	current_scene = main_menu_scene.instantiate()
 	add_child(current_scene)
 	
 func switch_to_main_menu() -> void:

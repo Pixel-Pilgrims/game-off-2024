@@ -23,6 +23,9 @@ func setup(data: Resource, starting_decoded_aspects: Dictionary = {}) -> void:
 func update_display() -> void:	
 	if not is_node_ready():
 		await ready
+		
+	await get_tree().process_frame
+	 
 	# Cost display
 	if is_aspect_decoded("cost"):
 		cost_label.text = str(card_data.energy_cost)
@@ -31,15 +34,16 @@ func update_display() -> void:
 	
 	# Name display
 	if is_aspect_decoded("name"):
-		name_label.text = card_data.name
+		name_label.text = str(card_data.name)
 	else:
 		name_label.text = UNKNOWN_NAME
 	
 	# Effect display
 	if is_aspect_decoded("description"):
-		effect_label.text = card_data.effect_description
+		effect_label.text = str(card_data.effect_description)
 	else:
 		effect_label.text = UNKNOWN_EFFECT
+		
 
 func is_aspect_decoded(aspect: String) -> bool:
 	return decoded_aspects.get(aspect, false)
@@ -97,8 +101,8 @@ func show_decode_menu() -> void:
 		popup.add_item("Decode Cost (2 points)", 0)
 	if not is_aspect_decoded("type"):
 		popup.add_item("Decode Type (3 points)", 1)
-	if not is_aspect_decoded("value"):
-		popup.add_item("Decode Value (4 points)", 2)
+	if not is_aspect_decoded("name"):
+		popup.add_item("Decode name (4 points)", 2)
 	if not is_aspect_decoded("description"):
 		popup.add_item("Decode Description (5 points)", 3)
 		
@@ -111,9 +115,9 @@ func show_decode_menu() -> void:
 	popup.popup()
 	
 func _on_decode_option_selected(id: int) -> void:
-	var decoder = get_node("/root/Main/Combat/DecoderManager")
+	var decoder = $DecoderManager
 	match id:
 		0: decoder.decode_aspect(self, "cost")
 		1: decoder.decode_aspect(self, "type")
-		2: decoder.decode_aspect(self, "value")
+		2: decoder.decode_aspect(self, "name")
 		3: decoder.decode_aspect(self, "description")
