@@ -3,19 +3,35 @@ extends Node
 @export var adventure: AdventureMapData
 @onready var adventureStagesContainer: HBoxContainer = $"../ScrollContainer/AdventureStages"
 @onready var lines_container: Node2D = $"../ScrollContainer/LinesContainer"
+@onready var scroll_container = $"../ScrollContainer"
 
 const NODE_SCENE = preload("res://scenes/encounter_node.tscn")
-@export var COLUMN_SPACING = 200
-@export var NODE_SPACING = 120
+@export var COLUMN_SPACING = 400
+@export var NODE_SPACING = 600
+@export var NODE_SIZE = 100
 @export var LINE_COLOR = Color("6b7280")
 @export var LINE_WIDTH = 3.0
-@export var DASH_LENGTH: float = 10.0
-@export var GAP_LENGTH: float = 10.0
+@export var DASH_LENGTH: float = 2.0
+@export var GAP_LENGTH: float = 20.0
+
+var last_scroll_pos: float = 0.0
+
+func _ready() -> void:
+	set_process(true)
 
 func init_adventure(adventureResource: AdventureMapData):
 	adventure = adventureResource
 	BackgroundSystem.setup_background(null)
 	drawMap()
+	
+
+func _process(_delta: float) -> void:
+	# Check if scroll position has changed
+	if scroll_container and lines_container:
+		var current_scroll = scroll_container.scroll_horizontal
+		if current_scroll != last_scroll_pos:
+			lines_container.position.x = -current_scroll
+			last_scroll_pos = current_scroll
 
 func drawMap() -> void:
 	# Clear existing nodes and lines
@@ -29,10 +45,16 @@ func drawMap() -> void:
 	
 	# Create stages (columns) based on depth
 	var stages = []
-	_gather_stages(adventure.rootEncounterNode, 0, stages)
+	var node_positions = {}
+	_gather_stages(adventure.rootEncounterNode, 0, stages, node_positions)
+	
+	# Calculate total width needed
+	var total_width = COLUMN_SPACING * stages.size()
+	adventureStagesContainer.custom_minimum_size.x = total_width
 	
 	# Create containers for each stage
-	for stage_nodes in stages:
+	for stage_idx in range(stages.size()):
+		var stage_nodes = stages[stage_idx]
 		var stage_container = VBoxContainer.new()
 		stage_container.custom_minimum_size.x = COLUMN_SPACING
 		stage_container.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -43,52 +65,63 @@ func drawMap() -> void:
 		for node_data in stage_nodes:
 			var encounter_node = _create_encounter_node(node_data)
 			stage_container.add_child(encounter_node)
+			node_positions[node_data] = encounter_node
 	
-	# Draw all connections after nodes are positioned
+	# Center the content
+	adventureStagesContainer.alignment = BoxContainer.ALIGNMENT_CENTER
+	
+	# Draw connections after nodes are positioned
 	await get_tree().process_frame
-	_draw_all_connections()
+	_draw_all_connections(node_positions)
 
-func _gather_stages(node: EncounterNodeData, depth: int, stages: Array) -> void:
+func _gather_stages(node: EncounterNodeData, depth: int, stages: Array, node_positions: Dictionary) -> void:
 	# Ensure we have an array for this depth
 	while stages.size() <= depth:
 		stages.append([])
 	
-	# Add node to its stage
-	stages[depth].append(node)
+	# Only add node if it hasn't been added before
+	if not node_positions.has(node):
+		stages[depth].append(node)
+		node_positions[node] = true
 	
 	# Process child nodes
 	for child in node.childNodes:
-		_gather_stages(child, depth + 1, stages)
+		_gather_stages(child, depth + 1, stages, node_positions)
 
 func _create_encounter_node(node_data: EncounterNodeData) -> Control:
 	var node_instance = NODE_SCENE.instantiate()
 	node_instance.setup(node_data)
 	
+	# Set consistent size
+	node_instance.custom_minimum_size = Vector2(NODE_SIZE * 2, NODE_SIZE * 3)
+	
 	# Node type specific setup
+	var node_circle = node_instance.get_node("CenterContainer/VBoxContainer/CenterContainer/Circle")
+	
 	if node_data is StartEncounterNodeData:
 		node_instance.set_start_node()
+		node_circle.color = Color("1a531a")
 	elif node_data is FinishEncounterNodeData:
 		node_instance.set_finish_node()
+		node_circle.color = Color("531a1a")
+	else:
+		node_circle.color = Color("4a4a4a")
 	
 	if node_data.completed:
 		node_instance.set_completed()
+		node_circle.color = Color("4a821a")
 	
 	return node_instance
 
-func _draw_all_connections() -> void:
-	var stages = adventureStagesContainer.get_children()
-	
-	for stage_idx in range(stages.size() - 1):  # Stop before last stage
-		var current_stage = stages[stage_idx]
-		var next_stage = stages[stage_idx + 1]
-		
-		for from_node in current_stage.get_children():
-			var from_data = from_node.get_node_data()
-			
-			for child_data in from_data.childNodes:
-				for to_node in next_stage.get_children():
-					if to_node.get_node_data() == child_data:
-						_draw_connection(from_node, to_node)
+func _draw_all_connections(node_positions: Dictionary) -> void:
+	# Draw connections directly from parent to child
+	for parent_node in node_positions.keys():
+		var parent_instance = node_positions[parent_node]
+		if parent_instance is Control:  # Check if it's an actual node instance
+			for child_data in parent_node.childNodes:
+				var child_instance = node_positions.get(child_data)
+				if child_instance is Control:
+					_draw_connection(parent_instance, child_instance)
 
 func _draw_connection(from_node: Control, to_node: Control) -> void:
 	var line = Line2D.new()
@@ -97,14 +130,14 @@ func _draw_connection(from_node: Control, to_node: Control) -> void:
 	line.begin_cap_mode = Line2D.LINE_CAP_ROUND
 	line.end_cap_mode = Line2D.LINE_CAP_ROUND
 	
-	# Get the circles' centers in local coordinates relative to their common parent
-	var from_circle = from_node.get_node("CenterContainer/VBoxContainer/Circle")
-	var to_circle = to_node.get_node("CenterContainer/VBoxContainer/Circle")
+	# Get the circles' centers in global coordinates
+	var from_circle = from_node.get_node("CenterContainer/VBoxContainer/CenterContainer/Circle")
+	var to_circle = to_node.get_node("CenterContainer/VBoxContainer/CenterContainer/Circle")
 	
 	var from_center = from_circle.get_global_rect().get_center()
 	var to_center = to_circle.get_global_rect().get_center()
 	
-	# Convert points to lines_container's local coordinates
+	# Convert points to lines_container's local coordinates, accounting for scroll
 	from_center = lines_container.to_local(from_center)
 	to_center = lines_container.to_local(to_center)
 	

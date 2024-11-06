@@ -4,7 +4,7 @@ signal node_clicked(node_data: EncounterNodeData)
 
 var node_data: EncounterNodeData
 
-@onready var circle: ColorRect = $CenterContainer/VBoxContainer/Circle
+@onready var circle: ColorRect = $CenterContainer/VBoxContainer/CenterContainer/Circle
 @onready var label: Label = $CenterContainer/VBoxContainer/Label
 
 const BASE_NODE_COLOR := Color("4a4a4a")
@@ -37,19 +37,19 @@ func get_node_data() -> EncounterNodeData:
 func set_start_node() -> void:
 	if not is_node_ready():
 		await ready
-	circle.color = START_NODE_COLOR
+	circle.set_node_color(START_NODE_COLOR)
 	label.text = "Start"
 
 func set_finish_node() -> void:
 	if not is_node_ready():
 		await ready
-	circle.color = FINISH_NODE_COLOR
+	circle.set_node_color(FINISH_NODE_COLOR)
 	label.text = "Final"
 
 func set_completed() -> void:
 	if not is_node_ready():
 		await ready
-	circle.color = COMPLETED_COLOR
+	circle.set_node_color(COMPLETED_COLOR)
 
 func update_appearance() -> void:
 	if not is_node_ready():
@@ -62,7 +62,7 @@ func update_appearance() -> void:
 	elif node_data is FinishEncounterNodeData:
 		set_finish_node()
 	else:
-		circle.color = BASE_NODE_COLOR
+		circle.set_node_color(BASE_NODE_COLOR)
 		label.text = "Encounter"
 
 func _on_gui_input(event: InputEvent) -> void:
