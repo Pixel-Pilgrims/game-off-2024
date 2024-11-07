@@ -1,5 +1,14 @@
 name: Build
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - "main"      
+    tags-ignore:
+      - "*"
+
+  pull_request:
+    branches:
+      - "main"
 
 permissions:
   contents: write
