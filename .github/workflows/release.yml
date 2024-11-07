@@ -78,7 +78,7 @@ jobs:
             
             ## Feedback
             If you encounter any issues, please report them in our issue tracker.
-           - name: Download and setup butler
+      - name: Download and setup butler
         run: |
           curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
           unzip butler.zip
