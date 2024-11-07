@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://msj23h0tw8h1"]
+[gd_scene load_steps=3 format=3 uid="uid://bbkk1eavesk0r"]
 
 [ext_resource type="Script" path="res://scripts/decipher_shop.gd" id="1_4mmax"]
 [ext_resource type="Script" path="res://scripts/managers/decoder_manager.gd" id="2_x8l22"]

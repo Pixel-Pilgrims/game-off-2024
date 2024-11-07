@@ -6,6 +6,7 @@ signal card_played(card)
 var card_data: Resource
 var decoded_aspects: Dictionary = {}
 
+@onready var sprite: Sprite2D = $Sprite2D
 @onready var cost_label: Label = $MarginContainer/VBoxContainer/TopBar/CostLabel
 @onready var name_label: Label = $MarginContainer/VBoxContainer/TopBar/NameLabel
 @onready var effect_label: Label = $MarginContainer/VBoxContainer/EffectLabel
@@ -15,6 +16,23 @@ const UNKNOWN_COST = "?"
 const UNKNOWN_NAME = "???"
 const UNKNOWN_EFFECT = "????????????"
 
+func _ready():
+	var material = ShaderMaterial.new()
+	material.shader = preload("res://resources/shaders/card_glow.gdshader")
+	sprite.material = material
+	# Start with no glow
+	set_selected(false)
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+	
+	# Important: Enable mouse processing
+	mouse_filter = Control.MOUSE_FILTER_STOP
+
+func set_selected(is_selected: bool):
+	if not sprite.material:
+		return
+	sprite.material.set_shader_parameter("glow_strength", 1.0 if is_selected else 0.0)
+	
 func setup(data: Resource, starting_decoded_aspects: Dictionary = {}) -> void:
 	card_data = data
 	decoded_aspects = starting_decoded_aspects
@@ -121,3 +139,9 @@ func _on_decode_option_selected(id: int) -> void:
 		1: decoder.decode_aspect(self, "type")
 		2: decoder.decode_aspect(self, "name")
 		3: decoder.decode_aspect(self, "description")
+		
+func _on_mouse_entered():
+	set_selected(true)
+
+func _on_mouse_exited():
+	set_selected(false)
