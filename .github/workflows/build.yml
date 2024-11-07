@@ -11,10 +11,14 @@ jobs:
       matrix:
         platform: [HTML5]
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Create export directory
+        run: mkdir html5
+
+      - name: Godot HTML5 export
+        uses: dulvui/godot-html-export@v1
         with:
-          lfs: true
-      - uses: manleydev/build-godot-action@v1.5.0
-        with:
-          name: whisperstone
-          preset: HTML5
+          godot-version: 4.3
+          create-export-preset-cfg: false
