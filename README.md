@@ -1,6 +1,14 @@
 # Whisperstone
 
 [![Build](https://github.com/Pixel-Pilgrims/game-off-2024/actions/workflows/build.yml/badge.svg)](https://github.com/Pixel-Pilgrims/game-off-2024/actions/workflows/build.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Godot Engine](https://img.shields.io/badge/Godot-4.3-blue.svg)](https://godotengine.org)
+[![Game Off 2024](https://img.shields.io/badge/Game%20Off-2024-purple)](https://itch.io/jam/game-off-2024)
+[![Release](https://img.shields.io/github/v/release/Pixel-Pilgrims/game-off-2024?include_prereleases)](https://github.com/Pixel-Pilgrims/game-off-2024/releases)
+[![Last Commit](https://img.shields.io/github/last-commit/Pixel-Pilgrims/game-off-2024)](https://github.com/Pixel-Pilgrims/game-off-2024/commits/main)
+[![Code Size](https://img.shields.io/github/languages/code-size/Pixel-Pilgrims/game-off-2024)](https://github.com/Pixel-Pilgrims/game-off-2024)
+[![Issues](https://img.shields.io/github/issues/Pixel-Pilgrims/game-off-2024)](https://github.com/Pixel-Pilgrims/game-off-2024/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/Pixel-Pilgrims/game-off-2024)](https://github.com/Pixel-Pilgrims/game-off-2024/pulls)
 
 A roguelike deck-builder where players discover magical scrolls that grant power through cards. Every card is initially unreadable, forcing players to choose between decoding their mysteries or wielding their raw, unpredictable power.
 
