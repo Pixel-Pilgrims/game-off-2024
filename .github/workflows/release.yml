@@ -1,33 +1,76 @@
 name: Release
+
 on:
   push:
     tags:
-      - 'v*'
+      - "v*.*.*"
+
+permissions:
+  contents: write
 
 jobs:
-  Release:
+  Godot:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    strategy:
+      matrix:
+        platform: [HTML5]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        
-      - name: Download HTML5 Build
-        uses: actions/download-artifact@v3
         with:
-          name: html5
-          path: html5
+          fetch-depth: 0
 
-      - name: Create ZIP Archive
+      - name: Get version from tag
+        id: get_version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          if [[ $VERSION == *"alpha"* || $VERSION == *"beta"* || $VERSION == *"prerelease"* ]]; then
+            echo "is_prerelease=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_prerelease=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create export directory
+        run: mkdir html5
+
+      - name: Godot HTML5 export
+        uses: dulvui/godot-4-html-export@v1.0.1
+        with:
+          godot-version: 4.3
+          godot-channel: stable
+
+      - name: Create ZIP archive
         run: |
           cd html5
-          zip -r ../game-html5.zip .
+          zip -r "../game-v${{ steps.get_version.outputs.version }}-html5.zip" .
+
+      - name: Generate release notes
+        id: release_notes
+        run: |
+          PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          if [ -z "$PREVIOUS_TAG" ]; then
+            # If no previous tag exists, use the first commit
+            echo "NOTES<<EOF" >> $GITHUB_OUTPUT
+            git log --pretty=format:"- %s" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "NOTES<<EOF" >> $GITHUB_OUTPUT
+            git log --pretty=format:"- %s" $PREVIOUS_TAG..HEAD >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          fi
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          files: game-html5.zip
-          draft: false
-          prerelease: false
-          generate_release_notes: true
+          files: game-v${{ steps.get_version.outputs.version }}-html5.zip
+          prerelease: ${{ steps.get_version.outputs.is_prerelease }}
+          body: |
+            ## What's Changed
+            ${{ steps.release_notes.outputs.NOTES }}
+            
+            ## Installation
+            Download the ZIP file for your platform and extract it to play the game.
+            
+            ## Feedback
+            If you encounter any issues, please report them in our issue tracker.
