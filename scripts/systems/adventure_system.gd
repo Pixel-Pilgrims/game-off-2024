@@ -153,9 +153,21 @@ func start_combat(combat_node: CombatEncounterNodeData) -> void:
 	
 	var enemies_container = current_scene.get_node("EnemiesContainer")
 	
-	for enemy_data in combat_node.enemies:
+	# Calculate spacing based on number of enemies
+	var num_enemies = combat_node.enemies.size()
+	var SPACING = 150  # Horizontal spacing between enemies
+	var total_width = (num_enemies - 1) * SPACING
+	var start_x = -total_width / 2  # Center the group of enemies
+	
+	# Spawn enemies with proper spacing
+	for i in range(num_enemies):
+		var enemy_data = combat_node.enemies[i]
 		var enemy_instance = enemy_data.enemy_scene.instantiate()
 		enemies_container.add_child(enemy_instance)
+		
+		# Position the enemy
+		enemy_instance.position.x = start_x + (i * SPACING)
+		
 		if enemy_instance.has_method("setup"):
 			enemy_instance.setup(enemy_data)
 	
