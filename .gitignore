@@ -1,9 +1,9 @@
 # Godot 4+ specific ignores
-.godot/
+.godot/editor/
+.godot/export*
 
 # Godot-specific ignores
-.import/
-export.cfg
+.cfg
 
 
 # Imported translations (automatically generated from CSV files)
