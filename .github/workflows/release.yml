@@ -6,7 +6,6 @@ on:
 
 jobs:
   Release:
-    needs: Godot
     runs-on: ubuntu-latest
     permissions:
       contents: write
