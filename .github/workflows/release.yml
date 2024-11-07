@@ -51,13 +51,15 @@ jobs:
           PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
           if [ -z "$PREVIOUS_TAG" ]; then
             # If no previous tag exists, use the first commit
-            echo "NOTES<<EOF" >> $GITHUB_OUTPUT
+            echo "NOTES<<ENDOFNOTES" >> $GITHUB_OUTPUT
             git log --pretty=format:"- %s" >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
+            echo "" >> $GITHUB_OUTPUT
+            echo "ENDOFNOTES" >> $GITHUB_OUTPUT
           else
-            echo "NOTES<<EOF" >> $GITHUB_OUTPUT
+            echo "NOTES<<ENDOFNOTES" >> $GITHUB_OUTPUT
             git log --pretty=format:"- %s" $PREVIOUS_TAG..HEAD >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
+            echo "" >> $GITHUB_OUTPUT
+            echo "ENDOFNOTES" >> $GITHUB_OUTPUT
           fi
 
       - name: Create Release
