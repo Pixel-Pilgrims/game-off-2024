@@ -9,12 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform: [linux, windows, mac]
+        platform: [HTML5]
     steps:
       - uses: actions/checkout@v2
         with:
           lfs: true
-      - uses: manleydev/build-godot-action@1.5.0
+      - uses: manleydev/build-godot-action@v1.5.0
         with:
           name: whisperstone
           preset: HTML5
