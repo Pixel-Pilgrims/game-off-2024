@@ -27,8 +27,10 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           if [[ $VERSION == *"alpha"* || $VERSION == *"beta"* || $VERSION == *"prerelease"* ]]; then
             echo "is_prerelease=true" >> $GITHUB_OUTPUT
+            echo "channel=html5-beta" >> $GITHUB_OUTPUT
           else
             echo "is_prerelease=false" >> $GITHUB_OUTPUT
+            echo "channel=html5" >> $GITHUB_OUTPUT
           fi
 
       - name: Create export directory
@@ -76,3 +78,17 @@ jobs:
             
             ## Feedback
             If you encounter any issues, please report them in our issue tracker.
+           - name: Download and setup butler
+        run: |
+          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+          ./butler -V
+
+      - name: Publish to itch.io
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+        run: |
+          ./butler push html5 ${{ secrets.ITCH_USERNAME }}/${{ secrets.ITCH_GAME_NAME }}:${{ steps.get_version.outputs.channel }} \
+            --userversion "${{ steps.get_version.outputs.version }}" \
+            --if-changed
