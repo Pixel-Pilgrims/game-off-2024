@@ -12,6 +12,8 @@ func _ready():
 	# Enable menu when it's first shown
 	enable_menu()
 	BackgroundSystem.setup_for_scene(name)
+	MusicSystem.play_background_music("res://assets/audio/music/main_menu_music.wav",0.2)
+	
 
 func _on_start_pressed():
 	print("start pressed")
