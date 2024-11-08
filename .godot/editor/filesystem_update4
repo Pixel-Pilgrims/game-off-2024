@@ -1,2 +1,11 @@
-res://scenes/encounter_node.tscn
+res://scenes/cutscene.tscn
 res://scripts/systems/adventure_system.gd
+res://scenes/main.tscn
+res://scenes/menus/main_menu.tscn
+res://scenes/menus/options_menu.tscn
+res://scenes/home_base.tscn
+res://scenes/adventure_map.tscn
+res://scenes/encounter_node.tscn
+res://scenes/combat.tscn
+res://scenes/enemies/cultist.tscn
+res://scripts/systems/background_system.gd

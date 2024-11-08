@@ -1,3 +1,4 @@
+TextureRect
 CenterContainer
 Node2D
 Label
@@ -11,4 +12,3 @@ GridContainer
 MarginContainer
 Control
 AudioStreamPlayer2D
-TextureRect
