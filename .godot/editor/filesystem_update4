@@ -1,2 +1,8 @@
-res://scenes/encounter_node.tscn
+res://scenes/main.tscn
 res://scripts/systems/adventure_system.gd
+res://scripts/systems/music_system.gd
+res://resources/cutscenes/new_game/new_game_cutscene.tres
+res://scripts/scenes/cutscene_scene.gd
+res://scripts/scenes/main_menu.gd
+res://scenes/menus/main_menu.tscn
+res://scripts/systems/background_system.gd

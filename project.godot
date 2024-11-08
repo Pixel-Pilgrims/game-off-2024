@@ -26,6 +26,7 @@ GameState="*res://scripts/autoload/game_state.gd"
 AdventureSystem="*res://scripts/systems/adventure_system.gd"
 BackgroundSystem="*res://scripts/systems/background_system.gd"
 CutsceneSystem="*res://scripts/systems/cutscene_system.gd"
+MusicSystem="*res://scripts/systems/music_system.gd"
 
 [display]
 
