@@ -1,10 +1,10 @@
 extends Node
 
 func play_background_music(resource_path: String, volume: float = 1.0) -> void:
-	print("Attempting to play: ", resource_path)
-	for child in get_children():
-		child.queue_free()
+	stop_current_background_music()
 	
+	print("Attempting to play: ", resource_path)
+
 	var stream_player = AudioStreamPlayer.new()
 	var audio_stream = load(resource_path)
 	
@@ -34,3 +34,7 @@ func play_background_music(resource_path: String, volume: float = 1.0) -> void:
 	add_child(stream_player)
 	stream_player.play()
 	print("Started playback, playing: ", stream_player.playing)
+	
+func stop_current_background_music() -> void:
+	for child in get_children():
+		child.queue_free()
