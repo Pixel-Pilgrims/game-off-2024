@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="CombatEncounterNodeData" load_steps=6 format=3 uid="uid://hixs5ub5k4we"]
+[gd_resource type="Resource" script_class="CombatEncounterNodeData" load_steps=7 format=3 uid="uid://hixs5ub5k4we"]
 
 [ext_resource type="Script" path="res://scripts/data/encounter_node_data.gd" id="1_eejxk"]
+[ext_resource type="Texture2D" uid="uid://bv4hwv2rttsay" path="res://assets/backgrounds/library_battleground_1.png" id="1_oxx3b"]
 [ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="2_dr5jw"]
 [ext_resource type="Resource" uid="uid://xpw7xp6klhla" path="res://resources/adventures/ingame_tutorial/3_combat.tres" id="2_fxa05"]
 [ext_resource type="Script" path="res://scripts/data/combat_encounter_node_data.gd" id="3_qyrbs"]
@@ -11,3 +12,4 @@ script = ExtResource("3_qyrbs")
 enemies = Array[ExtResource("2_dr5jw")]([ExtResource("4_cwl26"), ExtResource("4_cwl26"), ExtResource("4_cwl26")])
 childNodes = Array[ExtResource("1_eejxk")]([ExtResource("2_fxa05")])
 completed = false
+background = ExtResource("1_oxx3b")

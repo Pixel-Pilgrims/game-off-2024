@@ -2,7 +2,6 @@ extends Node
 
 # Preload the background textures
 const MAIN_MENU_BG = preload("res://assets/backgrounds/main_menu_bg.png")
-const COMBAT_BG = preload("res://assets/backgrounds/combat_bg.png")
 
 var current_background: Control
 
@@ -16,12 +15,6 @@ func setup_for_scene(scene_type: String) -> void:
 		"MainMenu":
 			background = TextureRect.new()
 			background.texture = MAIN_MENU_BG
-		"Combat":
-			background = TextureRect.new()
-			background.texture = COMBAT_BG
-		_:
-			background = ColorRect.new()
-			background.color = Color.DARK_TURQUOISE
 	
 	configure_and_set(background)
 	
