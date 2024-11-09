@@ -21,7 +21,7 @@ func _ready() -> void:
 
 func init_adventure(adventureResource: AdventureMapData):
 	adventure = adventureResource
-	BackgroundSystem.setup_background(null)
+	BackgroundSystem.setup_background(adventureResource.map_background)
 	drawMap()
 	
 
