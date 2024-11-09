@@ -18,6 +18,8 @@ func _ready():
 func cleanup_current_scene() -> void:
 	print("Main: Cleaning up current scene")
 	AdventureSystem.cleanup()
+	MusicSystem.stop_current_background_music()
+	
 	if current_scene:
 		remove_child(current_scene)
 		current_scene.queue_free()
@@ -46,6 +48,7 @@ func start_home_base() -> void:
 
 func handle_new_game() -> void:
 	GameState.start_new_run()
+	
 	var new_game_cutscene = load("res://resources/cutscenes/new_game/new_game_cutscene.tres")
 	cleanup_current_scene()
 	
