@@ -1,7 +1,7 @@
 extends Node
 
 # Preload the background textures
-const MAIN_MENU_BG = preload("res://assets/backgrounds/main_menu_bg.webp")
+const MAIN_MENU_BG = preload("res://assets/backgrounds/main_menu_bg.png")
 const COMBAT_BG = preload("res://assets/backgrounds/combat_bg.png")
 
 var current_background: Control
