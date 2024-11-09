@@ -1,5 +1,7 @@
 extends Node2D
 
+signal died
+
 var health: int = 40
 var max_health: int = 40
 var block: int = 0
@@ -24,7 +26,7 @@ func take_damage(amount: int) -> void:
 	update_health_display()
 	
 	if health <= 0:
-		die()
+		died.emit()
 
 func gain_block(amount: int) -> void:
 	block += amount
@@ -34,7 +36,3 @@ func gain_block(amount: int) -> void:
 func update_health_display() -> void:
 	var block_text = " [" + str(block) + "]" if block > 0 else ""
 	health_label.text = str(health) + "/" + str(max_health) + block_text
-
-func die() -> void:
-	print("Game Over!")
-	# Handle game over logic
