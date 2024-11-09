@@ -8,11 +8,6 @@
 
 config_version=5
 
-[ai_assistant_hub]
-
-base_url="http://127.0.0.1:11434"
-llm_api="ollama_api"
-
 [application]
 
 config/name="Whisperstone"
@@ -26,6 +21,7 @@ GameState="*res://scripts/autoload/game_state.gd"
 AdventureSystem="*res://scripts/systems/adventure_system.gd"
 BackgroundSystem="*res://scripts/systems/background_system.gd"
 CutsceneSystem="*res://scripts/systems/cutscene_system.gd"
+MusicSystem="*res://scripts/systems/music_system.gd"
 
 [display]
 
@@ -37,19 +33,9 @@ window/size/resizable=false
 
 enabled=PackedStringArray("res://addons/ability_editor/plugin.cfg")
 
-[github_to_itch]
-
-config/itch_username=""
-config/itch_project_name=""
-
 [global_group]
 
 encounter_nodes="All currently present encounter nodes"
-
-[maaacks_options_menus]
-
-disable_plugin_dialogues=true
-copy_path="res://scenes"
 
 [rendering]
 
