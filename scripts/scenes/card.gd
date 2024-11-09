@@ -1,6 +1,8 @@
+# scripts/scenes/card.gd
 extends Control
 
-signal card_played(card)
+signal card_played(card: Node)
+signal effect_executed(effect_type: String, value: int, target: Node)
 
 var card_data: Resource
 var decoded_aspects: Dictionary = {}
@@ -81,33 +83,36 @@ func _gui_input(event: InputEvent) -> void:
 			show_decode_menu()
 		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			var combat_scene = get_node("/root/Main/Combat")
-			var combat_manager = combat_scene.get_node("CombatManager")
-			if combat_manager and combat_manager.can_play_card(card_data.energy_cost):
+			var player = combat_scene.get_node("Player")
+			if player and player.can_spend_energy(card_data.energy_cost):
 				play_card()
 
 func play_card() -> void:
 	var combat_scene = get_node("/root/Main/Combat")
-	var combat_manager = combat_scene.get_node("CombatManager")
-	combat_manager.spend_energy(card_data.energy_cost)
-	execute_effect()
-	card_played.emit(self)
-	queue_free()
+	var player = combat_scene.get_node("Player")
+	
+	if player.can_spend_energy(card_data.energy_cost):
+		player.spend_energy(card_data.energy_cost)
+		execute_effect()
+		card_played.emit(self)
+		queue_free()
 
 func execute_effect() -> void:
 	var combat_scene = get_node("/root/Main/Combat")
+	var effect_value = get_effect_value()
 	
 	match card_data.card_type:
 		"attack":
 			var enemies_container = combat_scene.get_node("EnemiesContainer")
 			if enemies_container and enemies_container.get_child_count() > 0:
-				# For now, just target the first enemy
-				# You might want to implement target selection later
 				var enemy = enemies_container.get_child(0)
-				enemy.take_damage(get_effect_value())
+				enemy.take_damage(effect_value)
+				effect_executed.emit("attack", effect_value, enemy)
 		"block":
 			var player = combat_scene.get_node("Player")
 			if player:
-				player.gain_block(get_effect_value())
+				player.gain_block(effect_value)
+				effect_executed.emit("block", effect_value, player)
 
 func show_decode_menu() -> void:
 	var popup = PopupMenu.new()
