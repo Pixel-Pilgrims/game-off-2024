@@ -1,3 +1,1 @@
-EnemyData
-Resource
-CutsceneData
+AbilityData

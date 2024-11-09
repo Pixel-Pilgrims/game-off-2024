@@ -3,8 +3,9 @@ extends Node
 var current_energy: int = 3
 var max_energy: int = 3
 var is_player_turn: bool = true
+var turn_count: int = 0
 
-@onready var hand_manager: Node = $"../HandManager"
+@onready var hand_manager: HandManager = $"../HandManager"
 @onready var enemies_container: Node = $"../EnemiesContainer" 
 @onready var energy_label: Label = $"../UI/HUD/EnergyMarginContainer/EnergyTexture/EnergyLabel"
 
@@ -13,8 +14,11 @@ func _ready() -> void:
 	start_turn()
 
 func start_turn() -> void:
+	turn_count += 1
+	print("Start")
 	current_energy = max_energy
 	energy_label.text = str(current_energy)
+	
 	hand_manager.draw_cards(5)
 	is_player_turn = true
 	print("Player turn")

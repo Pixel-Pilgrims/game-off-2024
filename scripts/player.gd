@@ -1,8 +1,10 @@
 extends Node2D
 
-var health: int = 40
-var max_health: int = 40
-var block: int = 0
+@export var health: int = 40
+@export var current_energy = 3
+@export var max_energy = 3
+@export var max_health: int = 40
+@export var block: int = 0
 
 @onready var health_label = $HealthLabel
 

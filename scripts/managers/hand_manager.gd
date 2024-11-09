@@ -1,4 +1,5 @@
 extends Node
+class_name HandManager
 
 const CARD_SCENE = preload("res://scenes/card.tscn")
 

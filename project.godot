@@ -35,7 +35,7 @@ window/size/resizable=false
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/ability_editor/plugin.cfg")
 
 [github_to_itch]
 

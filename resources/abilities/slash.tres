@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://17tkjbfkx2sh"]
+
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_nhtau"]
+
+[resource]
+script = ExtResource("1_nhtau")
+name = "Slash"
+type = 0
+value = 6
+weight = 1
+description = "A basic slashing attack that deals 6 damage."
