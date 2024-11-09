@@ -79,14 +79,15 @@ func _gather_stages(node: EncounterNodeData, depth: int, stages: Array, node_pos
 	while stages.size() <= depth:
 		stages.append([])
 	
-	# Only add node if it hasn't been added before
-	if not node_positions.has(node):
+	# Only add node if it hasn't been added before and isn't a finish node
+	if not node_positions.has(node) and not node is FinishEncounterNodeData:
 		stages[depth].append(node)
 		node_positions[node] = true
 	
 	# Process child nodes
 	for child in node.childNodes:
-		_gather_stages(child, depth + 1, stages, node_positions)
+		if not child is FinishEncounterNodeData:
+			_gather_stages(child, depth + 1, stages, node_positions)
 
 func _create_encounter_node(node_data: EncounterNodeData) -> Control:
 	var node_instance = NODE_SCENE.instantiate()
@@ -114,11 +115,14 @@ func _create_encounter_node(node_data: EncounterNodeData) -> Control:
 	return node_instance
 
 func _draw_all_connections(node_positions: Dictionary) -> void:
-	# Draw connections directly from parent to child
+	# Draw connections directly from parent to child, skipping finish nodes
 	for parent_node in node_positions.keys():
 		var parent_instance = node_positions[parent_node]
-		if parent_instance is Control:  # Check if it's an actual node instance
+		if parent_instance is Control:
 			for child_data in parent_node.childNodes:
+				# Skip drawing connections to finish nodes
+				if child_data is FinishEncounterNodeData:
+					continue
 				var child_instance = node_positions.get(child_data)
 				if child_instance is Control:
 					_draw_connection(parent_instance, child_instance)

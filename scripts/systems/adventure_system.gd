@@ -1,3 +1,4 @@
+# scripts/systems/adventure_system.gd
 extends Node
 
 signal adventure_started(adventure_data: AdventureMapData)
@@ -129,10 +130,26 @@ func complete_current_encounter() -> void:
 	current_node.completed = true
 	encounter_completed.emit(current_node)
 	
-	if current_node is FinishEncounterNodeData:
+	# Check if this was the final encounter
+	if is_final_encounter(current_node):
+		print("Final encounter completed, transitioning to home base")
 		adventure_completed.emit(current_adventure)
+		# Transition to home base
+		var main = get_node("/root/Main")
+		if main.has_method("start_home_base"):
+			main.start_home_base()
 	else:
 		call_deferred("_handle_encounter_completion")
+
+func is_final_encounter(node: EncounterNodeData) -> bool:
+	# Check if this node only leads to finish nodes or has no children
+	if node.childNodes.is_empty():
+		return true
+	
+	for child in node.childNodes:
+		if not child is FinishEncounterNodeData:
+			return false
+	return true
 
 func _handle_encounter_completion() -> void:
 	if is_instance_valid(current_scene):
