@@ -1,10 +1,13 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://bjkxuf2s1608i"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=6 format=3 uid="uid://bjkxuf2s1608i"]
 
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_calbo"]
 [ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1_g2v6o"]
 [ext_resource type="PackedScene" uid="uid://cbtac01eivwim" path="res://scenes/enemies/cultist.tscn" id="1_uchoq"]
+[ext_resource type="Resource" uid="uid://17tkjbfkx2sh" path="res://resources/abilities/slash.tres" id="2_e3j58"]
+[ext_resource type="Resource" uid="uid://df2hudinfu3iv" path="res://resources/abilities/dark_ritual.tres" id="3_k0onl"]
 
 [resource]
 script = ExtResource("1_g2v6o")
 enemy_scene = ExtResource("1_uchoq")
 health = 10
-abilities = []
+abilities = Array[ExtResource("1_calbo")]([ExtResource("2_e3j58"), ExtResource("3_k0onl")])

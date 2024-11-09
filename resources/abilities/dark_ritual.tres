@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://df2hudinfu3iv"]
+
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_32x2t"]
+
+[resource]
+script = ExtResource("1_32x2t")
+name = "Dark Ritual"
+type = 0
+value = 9
+weight = 1
+description = "A powerful dark magic attack that deals 9 damage."

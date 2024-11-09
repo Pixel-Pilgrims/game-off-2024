@@ -8,11 +8,6 @@
 
 config_version=5
 
-[ai_assistant_hub]
-
-base_url="http://127.0.0.1:11434"
-llm_api="ollama_api"
-
 [application]
 
 config/name="Whisperstone"
@@ -34,19 +29,13 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/resizable=false
 
-[github_to_itch]
+[editor_plugins]
 
-config/itch_username=""
-config/itch_project_name=""
+enabled=PackedStringArray("res://addons/ability_editor/plugin.cfg")
 
 [global_group]
 
 encounter_nodes="All currently present encounter nodes"
-
-[maaacks_options_menus]
-
-disable_plugin_dialogues=true
-copy_path="res://scenes"
 
 [rendering]
 
