@@ -17,16 +17,6 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 48
-text = "Card Game"
-horizontal_alignment = 1
-
 [node name="ContinueButton" type="Button" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2

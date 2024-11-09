@@ -22,6 +22,7 @@ func setup_starting_deck() -> void:
 	draw_pile.shuffle()
 
 func draw_cards(amount: int) -> void:
+	print("Hand manager: drawing %d cards" % [amount])
 	for i in range(amount):
 		if draw_pile.size() == 0:
 			print("Draw pile empty")
