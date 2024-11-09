@@ -1,12 +1,12 @@
-CenterContainer
-Node2D
+Button
 Label
+VBoxContainer
+CenterContainer
 ColorRect
+Node2D
 HBoxContainer
 ScrollContainer
 Node
-VBoxContainer
-Button
 GridContainer
 MarginContainer
 Control
