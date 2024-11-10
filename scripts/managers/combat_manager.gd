@@ -21,6 +21,7 @@ var enemies_completed_turn: int = 0
 func _ready() -> void:
 	setup_signal_connections()
 	await hand_manager.ready
+	await player.ready
 	start_combat()
 
 func setup_signal_connections() -> void:

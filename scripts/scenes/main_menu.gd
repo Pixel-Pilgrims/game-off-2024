@@ -2,7 +2,7 @@
 extends Control
 
 const OPTIONS_SCENE = preload("res://scenes/menus/options_menu.tscn")
-const HOME_BASE_SCENE = preload("res://scripts/scenes/home_base.tscn")
+const HOME_BASE_SCENE = preload("res://scenes/home_base.tscn")
 
 func _ready():
 	$CenterContainer/VBoxContainer/StartButton.pressed.connect(_on_start_pressed)

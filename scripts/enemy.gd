@@ -8,23 +8,18 @@ signal intent_changed(intent: AbilityData)
 signal attack_executed(damage: int, target: Node)
 signal block_gained(amount: int)
 
+@onready var health_bar: HealthBar = $HealthBar
+
 var health: int = 30
 var max_health: int = 30
 var abilities: Array[AbilityData] = []
 var current_intent: AbilityData
 var block: int = 0
 
-@onready var health_label: Label = $HealthLabel
-
-func _ready() -> void:
-	update_health_display()
-	if not abilities.is_empty():
-		set_next_intent()
-
 func take_damage(amount: int) -> void:
 	health -= amount
+	health_bar.set_health(health)
 	damage_taken.emit(amount)
-	update_health_display()
 	if health <= 0:
 		died.emit()
 		queue_free()
@@ -45,8 +40,8 @@ func execute_intent() -> void:
 
 func gain_block(amount: int) -> void:
 	block += amount
+	health_bar.set_block(block)
 	block_gained.emit(amount)
-	update_health_display()
 
 func select_random_ability() -> AbilityData:
 	if abilities.is_empty():
@@ -63,15 +58,11 @@ func set_next_intent() -> void:
 	current_intent = select_random_ability()
 	intent_changed.emit(current_intent)
 
-func update_health_display() -> void:
-	var block_text = " [" + str(block) + "]" if block > 0 else ""
-	health_label.text = str(health) + "/" + str(max_health) + block_text
-
 func setup(enemy_data: EnemyData) -> void:
 	if not is_node_ready():
 		await ready
 	health = enemy_data.health
 	max_health = enemy_data.health
 	abilities = enemy_data.abilities
-	update_health_display()
+	health_bar.setup(max_health, false)
 	set_next_intent()
