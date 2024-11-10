@@ -37,7 +37,7 @@ func setup_controls():
 	# Convert from dB to percentage for display
 	master_volume_slider.value = db_to_percent(ConfigManager.config.audio.master_volume)
 	mute_toggle.button_pressed = ConfigManager.config.audio.muted
-		
+	
 	# Update volume display
 	_update_volume_label(master_volume_slider.value)
 	
