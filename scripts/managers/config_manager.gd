@@ -13,6 +13,9 @@ var config = {
 	"audio": {
 		"master_volume": 0,
 		"muted": false
+	},
+	"game": {
+		"skip_intro": false
 	}
 }
 
@@ -68,6 +71,8 @@ func load_config() -> void:
 				config.video = loaded_config.video
 			if "audio" in loaded_config:
 				config.audio = loaded_config.audio
+			if "game" in loaded_config:
+				config.game = loaded_config.game
 
 func update_video_settings(fullscreen: bool, resolution_index: int) -> void:
 	var mode_changed = config.video.fullscreen != fullscreen
@@ -103,4 +108,8 @@ func apply_config() -> void:
 func update_audio_settings(volume: float, muted: bool) -> void:
 	config.audio.master_volume = volume
 	config.audio.muted = muted
+	save_config()
+	
+func update_game_settings(skip_intro: bool) -> void:
+	config.game.skip_intro = skip_intro
 	save_config()

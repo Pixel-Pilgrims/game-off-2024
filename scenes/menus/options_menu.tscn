@@ -33,9 +33,10 @@ theme_override_constants/margin_bottom = 20
 
 [node name="TabContainer" type="TabContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
-current_tab = 0
+current_tab = 2
 
 [node name="Video" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 20
 metadata/_tab_index = 0
@@ -94,6 +95,20 @@ text = "100%"
 [node name="VolumeSlider" type="HSlider" parent="CenterContainer/PanelContainer/MarginContainer/TabContainer/Audio"]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="Game" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="SkipIntroLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/TabContainer/Game"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Skip Intro"
+
+[node name="SkipIntroToggle" type="CheckButton" parent="CenterContainer/PanelContainer/MarginContainer/TabContainer/Game"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
 
 [node name="BackButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer"]
 unique_name_in_owner = true
