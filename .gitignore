@@ -19,3 +19,5 @@ mono_crash.*.json
 
 # Repomix-specific ignores
 repomix-output.txt
+
+.idea

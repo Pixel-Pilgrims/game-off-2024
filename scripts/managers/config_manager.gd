@@ -13,6 +13,9 @@ var config = {
 	"audio": {
 		"master_volume": 0,
 		"muted": false
+	},
+	"game": {
+		"skip_intro": false
 	}
 }
 
@@ -32,6 +35,7 @@ func _ready() -> void:
 func save_config() -> void:
 	var config_file = FileAccess.open(CONFIG_PATH, FileAccess.WRITE)
 	var json_string = JSON.stringify(config)
+	print(json_string)
 	config_file.store_string(json_string)
 
 func load_config() -> void:
@@ -58,7 +62,7 @@ func load_config() -> void:
 		
 	var config_file = FileAccess.open(CONFIG_PATH, FileAccess.READ)
 	var json_string = config_file.get_as_text()
-	
+		
 	var json = JSON.new()
 	var parse_result = json.parse(json_string)
 	if parse_result == OK:
@@ -103,4 +107,8 @@ func apply_config() -> void:
 func update_audio_settings(volume: float, muted: bool) -> void:
 	config.audio.master_volume = volume
 	config.audio.muted = muted
+	save_config()
+	
+func update_game_settings(skip_intro: bool) -> void:
+	config.game.skip_intro = skip_intro
 	save_config()

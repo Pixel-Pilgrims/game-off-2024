@@ -13,7 +13,7 @@ var exit_callback: Callable
 func _ready() -> void:
 	audio_player.connect("finished", _on_audio_finished)
 
-func start_cutscene(cutscene: CutsceneData, callback: Callable) -> void:
+func start_cutscene(cutscene: CutsceneData, callback: Callable) -> void:	
 	if not cutscene:
 		push_error("Invalid cutscene resource")
 		return
@@ -34,6 +34,9 @@ func start_cutscene(cutscene: CutsceneData, callback: Callable) -> void:
 	
 	# Start checking timestamps
 	set_process(true)
+	
+	if ConfigManager.config.game.skip_intro:
+		skip_cutscene()
 
 func _process(_delta: float) -> void:
 	if not current_cutscene or current_frame_index >= current_cutscene.frames.size():
