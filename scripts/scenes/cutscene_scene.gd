@@ -34,9 +34,6 @@ func start_cutscene(cutscene: CutsceneData, callback: Callable) -> void:
 	
 	# Start checking timestamps
 	set_process(true)
-	
-	if ConfigManager.config.game.skip_intro:
-		skip_cutscene()
 
 func _process(_delta: float) -> void:
 	if not current_cutscene or current_frame_index >= current_cutscene.frames.size():
