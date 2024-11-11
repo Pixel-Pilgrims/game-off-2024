@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://void_blast"]
+
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_ability"]
+
+[resource]
+script = ExtResource("1_ability")
+name = "Void Blast"
+type = 0  # ATTACK
+value = 12
+weight = 3
+description = "Channels void energy dealing 12 damage."

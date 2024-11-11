@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cwood2dx8lyvt"]
+
+[node name="AdventureGenerator" type="Node2D"]

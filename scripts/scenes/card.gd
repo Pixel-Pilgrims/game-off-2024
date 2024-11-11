@@ -4,7 +4,7 @@ extends Control
 signal card_played(card: Node)
 signal effect_executed(effect_type: String, value: int, target: Node)
 
-var card_data: Resource
+var card_data: CardData
 var decoded_aspects: Dictionary = {}
 
 @onready var cost_label: Label = $MarginContainer/VBoxContainer/TopBar/CostLabel
@@ -92,6 +92,7 @@ func play_card() -> void:
 	var player = combat_scene.get_node("Player")
 	
 	if player.can_spend_energy(card_data.energy_cost):
+		print("Player played ", card_data.name)
 		player.spend_energy(card_data.energy_cost)
 		execute_effect()
 		card_played.emit(self)
