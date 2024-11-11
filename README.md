@@ -1,6 +1,7 @@
 # Whisperstone
 
 [![Build](https://github.com/Pixel-Pilgrims/game-off-2024/actions/workflows/build.yml/badge.svg)](https://github.com/Pixel-Pilgrims/game-off-2024/actions/workflows/build.yml)
+[![GDScript Static checks](https://github.com/Pixel-Pilgrims/game-off-2024/actions/workflows/gdscript-static-checks.yml/badge.svg)](https://github.com/Pixel-Pilgrims/game-off-2024/actions/workflows/gdscript-static-checks.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Godot Engine](https://img.shields.io/badge/Godot-4.3-blue.svg)](https://godotengine.org)
 [![Game Off 2024](https://img.shields.io/badge/Game%20Off-2024-purple)](https://itch.io/jam/game-off-2024)
