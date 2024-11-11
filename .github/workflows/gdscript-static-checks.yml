@@ -7,11 +7,32 @@ on:
     branches: [ "main" ]
 
 jobs:
-  static-checks:
-    name: 'Static checks'
+  lint:
     runs-on: ubuntu-latest
+    name: "Lint"
     steps:
-    - uses: actions/checkout@v4
-    - uses: Scony/godot-gdscript-toolkit@master
-    - run: gdformat --check scripts/
-    - run: gdlint scripts/
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup gdtoolkit
+        uses: Scony/godot-gdscript-toolkit@master
+
+      - name: Lint
+        run: gdlint scripts/
+
+  formatting:
+    runs-on: ubuntu-latest
+    name: "Formatting"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup gdtoolkit
+        uses: Scony/godot-gdscript-toolkit@master
+
+      - name: Check formatting
+        run: gdformat --check scripts/
