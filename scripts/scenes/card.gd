@@ -92,10 +92,14 @@ func play_card() -> void:
 	var player = combat_scene.get_node("Player")
 	
 	if player.can_spend_energy(card_data.energy_cost):
+		# Play card sound
+		SoundEffectsSystem.play_sound("ui", "card_play", -5.0)
 		player.spend_energy(card_data.energy_cost)
 		execute_effect()
 		card_played.emit(self)
 		queue_free()
+	else:
+		SoundEffectsSystem.play_sound("ui", "card_deny", -5.0)
 
 func execute_effect() -> void:
 	var combat_scene = get_node("/root/Main/Combat")
@@ -144,3 +148,6 @@ func _on_decode_option_selected(id: int) -> void:
 		1: decoder.decode_aspect(self, "type")
 		2: decoder.decode_aspect(self, "value")
 		3: decoder.decode_aspect(self, "description")
+		
+func _on_mouse_entered() -> void:
+	SoundEffectsSystem.play_sound("ui", "card_hover", -15.0)

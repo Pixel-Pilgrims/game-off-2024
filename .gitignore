@@ -22,3 +22,5 @@ mono_crash.*.json
 repomix-output.txt
 
 .idea
+
+assets/packs/

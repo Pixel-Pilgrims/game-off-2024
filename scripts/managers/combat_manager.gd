@@ -1,4 +1,3 @@
-# scripts/managers/combat_manager.gd
 extends Node
 
 signal combat_started
@@ -10,7 +9,7 @@ const GAME_OVER_SCENE = preload("res://scenes/game_over.tscn")
 
 var is_player_turn: bool = true
 var turn_count: int = 0
-var enemies_completed_turn: int = 0
+var current_enemy_index: int = -1
 
 @onready var hand_manager: HandManager = $"../HandManager"
 @onready var enemies_container: Node = $"../EnemiesContainer" 
@@ -63,6 +62,7 @@ func start_combat() -> void:
 func start_player_turn() -> void:
 	turn_count += 1
 	is_player_turn = true
+	current_enemy_index = -1
 	turn_started.emit()
 	player.start_turn()
 	hand_manager.draw_cards(5)
@@ -75,24 +75,30 @@ func end_player_turn() -> void:
 	is_player_turn = false
 	end_turn_button.disabled = true
 	hand_manager.discard_hand()
-	
-	# Reset enemy turn counter and start enemy turns
-	enemies_completed_turn = 0
-	_start_enemy_turns()
+	start_next_enemy_turn()
 
-func _start_enemy_turns() -> void:
-	for enemy in enemies_container.get_children():
-		if enemy.has_method("take_turn"):
-			enemy.take_turn()
+func start_next_enemy_turn() -> void:
+	current_enemy_index += 1
+	var enemies = enemies_container.get_children()
+	
+	# Skip any enemies that were removed during previous turns
+	while current_enemy_index < enemies.size() and not is_instance_valid(enemies[current_enemy_index]):
+		current_enemy_index += 1
+	
+	if current_enemy_index >= enemies.size():
+		# All enemies have taken their turn
+		start_player_turn()
+		return
+	
+	# Start the current enemy's turn
+	var current_enemy = enemies[current_enemy_index]
+	if current_enemy.has_method("take_turn"):
+		current_enemy.take_turn()
 
 func _on_enemy_turn_ended() -> void:
-	enemies_completed_turn += 1
-	
-	# Only start player turn when all enemies have finished
-	if enemies_completed_turn >= enemies_container.get_child_count():
-		start_player_turn()
+	start_next_enemy_turn()
 
-func _on_enemy_attack(damage: int, _enemy: Node) -> void:
+func _on_enemy_attack(damage: int, enemy: Node) -> void:
 	player.take_damage(damage)
 
 func _on_player_energy_changed(new_amount: int, _max_amount: int) -> void:

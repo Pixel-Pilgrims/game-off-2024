@@ -22,6 +22,7 @@ AdventureSystem="*res://scripts/systems/adventure_system.gd"
 BackgroundSystem="*res://scripts/systems/background_system.gd"
 CutsceneSystem="*res://scripts/systems/cutscene_system.gd"
 MusicSystem="*res://scripts/systems/music_system.gd"
+SoundEffectsSystem="*res://scripts/systems/sound_effects_system.gd"
 
 [display]
 
@@ -31,7 +32,7 @@ window/size/resizable=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/ability_editor/plugin.cfg")
+enabled=PackedStringArray()
 
 [global_group]
 
