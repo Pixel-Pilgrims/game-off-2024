@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3hv5sm4hjouf"]
+[gd_scene load_steps=4 format=3 uid="uid://b3hv5sm4hjouf"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_wa7o7"]
 [ext_resource type="PackedScene" uid="uid://c0l75fsf0a0lh" path="res://scenes/ui/health_bar.tscn" id="2_ahs3m"]
+[ext_resource type="Script" path="res://scripts/animators/combat_animator.gd" id="3_l6amq"]
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_wa7o7")
@@ -11,3 +12,6 @@ offset_left = -50.0
 offset_top = 630.0
 offset_right = 350.0
 offset_bottom = 680.0
+
+[node name="CombatAnimator" type="Node" parent="."]
+script = ExtResource("3_l6amq")

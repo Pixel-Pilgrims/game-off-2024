@@ -105,11 +105,15 @@ func play_card() -> void:
 	var player = combat_scene.get_node("Player")
 	
 	if player.can_spend_energy(card_data.energy_cost):
+		# Play card sound
+		SoundEffectsSystem.play_sound("ui", "card_play", -5.0)
 		print("Player played ", card_data.name)
 		player.spend_energy(card_data.energy_cost)
 		execute_effect()
 		card_played.emit(self)
 		queue_free()
+	else:
+		SoundEffectsSystem.play_sound("ui", "card_deny", -5.0)
 
 func execute_effect() -> void:
 	var combat_scene = get_node("/root/Main/Combat")
@@ -165,6 +169,7 @@ func set_selected(is_selected: bool):
 	sprite.material.set_shader_parameter("glow_strength", 1.0 if is_selected else 0.0)
 
 func _on_mouse_entered():
+	SoundEffectsSystem.play_sound("ui", "card_hover", -15.0)
 	set_selected(true)
 
 func _on_mouse_exited():
