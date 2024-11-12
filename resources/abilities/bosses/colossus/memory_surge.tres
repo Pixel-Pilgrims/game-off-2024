@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://memory_surge"]
+
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_ability"]
+
+[resource]
+script = ExtResource("1_ability")
+name = "Memory Surge"
+type = 2  # BUFF
+value = 3
+weight = 2
+description = "Gains 3 strength for each unread card in your hand."

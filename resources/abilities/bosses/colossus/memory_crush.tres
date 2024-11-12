@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://memory_crush"]
+
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_ability"]
+
+[resource]
+script = ExtResource("1_ability")
+name = "Memory Crush"
+type = 0  # ATTACK
+value = 20
+weight = 2
+description = "A devastating blow dealing 20 damage."

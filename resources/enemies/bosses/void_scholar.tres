@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=8 format=3 uid="uid://7qt0t2rewiqd"]
+
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_i3ira"]
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://cbtac01eivwim" path="res://scenes/enemies/cultist.tscn" id="2_enemy"]
+[ext_resource type="Resource" path="res://resources/abilities/bosses/scholar/knowledge_corruption.tres" id="2_fkt8k"]
+[ext_resource type="Resource" path="res://resources/abilities/bosses/scholar/void_blast.tres" id="3_u5e4r"]
+[ext_resource type="Resource" path="res://resources/abilities/bosses/scholar/void_mist.tres" id="4_84hti"]
+[ext_resource type="Resource" path="res://resources/abilities/bosses/scholar/void_shield.tres" id="5_excfg"]
+
+[resource]
+script = ExtResource("1_script")
+enemy_scene = ExtResource("2_enemy")
+health = 350
+abilities = Array[ExtResource("1_i3ira")]([ExtResource("2_fkt8k"), ExtResource("3_u5e4r"), ExtResource("4_84hti"), ExtResource("5_excfg")])
