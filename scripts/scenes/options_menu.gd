@@ -10,6 +10,7 @@ signal options_closed
 @onready var mute_toggle = %MuteToggle
 @onready var back_button = %BackButton
 @onready var volume_label = %VolumeLabelValue
+@onready var skip_introduction_toggle = %SkipIntroToggle
 
 # Constants for volume conversion
 const MIN_DB = -80
@@ -50,6 +51,7 @@ func connect_signals():
 	master_volume_slider.value_changed.connect(_on_volume_changed)
 	mute_toggle.toggled.connect(_on_mute_toggled)
 	back_button.pressed.connect(_on_back_pressed)
+	skip_introduction_toggle.toggled.connect(_on_skip_introduction_toggled)
 
 # Convert decibel value to percentage (0-100)
 func db_to_percent(db: float) -> float:
@@ -114,6 +116,10 @@ func _on_mute_toggled(button_pressed: bool):
 	print("Mute toggled: ", button_pressed) # Debug print
 	AudioServer.set_bus_mute(0, button_pressed)
 	save_settings()
+	
+func _on_skip_introduction_toggled(button_pressed: bool):
+	print("Skip Intro toggled: ", button_pressed)
+	save_settings()
 
 func _on_back_pressed():
 	print("Back pressed") # Debug print
@@ -130,6 +136,9 @@ func save_settings():
 		percent_to_db(master_volume_slider.value),
 		mute_toggle.button_pressed
 	)
+	ConfigManager.update_game_settings(
+		skip_introduction_toggle.button_pressed
+	)
 
 func load_settings():
 	fullscreen_toggle.button_pressed = ConfigManager.config.video.fullscreen
@@ -137,6 +146,7 @@ func load_settings():
 	master_volume_slider.value = db_to_percent(ConfigManager.config.audio.master_volume)
 	_update_volume_label(master_volume_slider.value)
 	mute_toggle.button_pressed = ConfigManager.config.audio.muted
+	skip_introduction_toggle.button_pressed = ConfigManager.config.game.skip_intro
 	
 	# Apply the settings
 	if ConfigManager.config.video.fullscreen:

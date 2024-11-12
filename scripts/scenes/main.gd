@@ -57,15 +57,17 @@ func handle_new_game() -> void:
 	var new_game_cutscene = load("res://resources/cutscenes/new_game/new_game_cutscene.tres")
 	cleanup_current_scene()
 	
-	# Start the cutscene
-	CutsceneSystem.play_cutscene(new_game_cutscene, func():
-		# After cutscene, start tutorial
-		var ingame_tutorial_adventure = load("res://resources/adventures/ingame_tutorial/adventure_map.tres")
-		AdventureSystem.start_adventure(ingame_tutorial_adventure)
-		# Connect to adventure completion if not already connected
-		if not AdventureSystem.adventure_completed.is_connected(_on_tutorial_completed):
-			AdventureSystem.adventure_completed.connect(_on_tutorial_completed)
-	)
+	if ConfigManager.config.game.skip_intro:
+		start_adventure()
+	else:
+		CutsceneSystem.play_cutscene(new_game_cutscene, start_adventure)
+
+func start_adventure() -> void:
+	var ingame_tutorial_adventure = load("res://resources/adventures/ingame_tutorial/adventure_map.tres")
+	AdventureSystem.start_adventure(ingame_tutorial_adventure)
+	# Connect to adventure completion if not already connected
+	if not AdventureSystem.adventure_completed.is_connected(_on_tutorial_completed):
+		AdventureSystem.adventure_completed.connect(_on_tutorial_completed)
 
 func _on_tutorial_completed(_adventure: AdventureMapData) -> void:
 	start_home_base()

@@ -8,6 +8,7 @@ signal adventure_completed(adventure_data: AdventureMapData)
 
 const COMBAT_SCENE = preload("res://scenes/combat.tscn")
 const ADVENTURE_MAP_SCENE = preload("res://scenes/adventure_map.tscn")
+const ENEMY_SCENE = preload("res://scenes/enemies/enemy.tscn")
 
 var current_adventure: AdventureMapData
 var current_node: EncounterNodeData
@@ -172,21 +173,23 @@ func start_combat(combat_node: CombatEncounterNodeData) -> void:
 	
 	# Calculate spacing based on number of enemies
 	var num_enemies = combat_node.enemies.size()
-	var SPACING = 150  # Horizontal spacing between enemies
+	var SPACING = 300  # Horizontal spacing between enemies
 	var total_width = (num_enemies - 1) * SPACING
 	var start_x = -total_width / 2  # Center the group of enemies
 	
 	# Spawn enemies with proper spacing
 	for i in range(num_enemies):
 		var enemy_data = combat_node.enemies[i]
+		var enemy_scene = ENEMY_SCENE.instantiate();
 		var enemy_instance = enemy_data.enemy_scene.instantiate()
-		enemies_container.add_child(enemy_instance)
+		enemy_scene.add_child(enemy_instance)
+		enemies_container.add_child(enemy_scene)
 		
 		# Position the enemy
-		enemy_instance.position.x = start_x + (i * SPACING)
+		enemy_scene.position.x = start_x + (i * SPACING)
 		
-		if enemy_instance.has_method("setup"):
-			enemy_instance.setup(enemy_data)
+		if enemy_scene.has_method("setup"):
+			enemy_scene.setup(enemy_data)
 	
 	main.call_deferred("add_child", current_scene)
 

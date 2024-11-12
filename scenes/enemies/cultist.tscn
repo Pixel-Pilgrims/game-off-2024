@@ -1,17 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbtac01eivwim"]
+[gd_scene load_steps=2 format=3 uid="uid://cbtac01eivwim"]
 
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_c11yq"]
-[ext_resource type="Texture2D" uid="uid://cg3tyx6602ohg" path="res://assets/enemies/cultist.png" id="2_1jg2a"]
+[ext_resource type="Texture2D" uid="uid://dv14q1ehrvsd7" path="res://assets/enemies/cultist.png" id="2_1jg2a"]
 
 [node name="Cultist" type="Node2D"]
-script = ExtResource("1_c11yq")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(300, 600)
 offset_right = 100.0
 offset_bottom = 200.0
 texture = ExtResource("2_1jg2a")
-
-[node name="HealthLabel" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
