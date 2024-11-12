@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://void_mist"]
+
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_ability"]
+
+[resource]
+script = ExtResource("1_ability")
+name = "Void Mist"
+type = 1  # BLOCK
+value = 10
+weight = 2
+description = "Surrounds self with void mist gaining 10 block."

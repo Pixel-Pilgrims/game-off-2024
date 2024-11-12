@@ -20,7 +20,9 @@ func take_damage(amount: int) -> void:
 	health -= amount
 	health_bar.set_health(health)
 	damage_taken.emit(amount)
+	print("Enemy took ", amount, " damage")
 	if health <= 0:
+		print("Enemy died")
 		died.emit()
 		queue_free()
 
@@ -31,6 +33,7 @@ func take_turn() -> void:
 	turn_ended.emit()
 
 func execute_intent() -> void:
+	print("Enemy uses ", current_intent.name)
 	match current_intent.type:
 		AbilityData.AbilityType.ATTACK:
 			attack_executed.emit(current_intent.value, self)

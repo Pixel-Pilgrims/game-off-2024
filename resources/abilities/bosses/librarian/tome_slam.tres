@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://dnvhj5c8rxs1e"]
+
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_ability"]
+
+[resource]
+script = ExtResource("1_ability")
+name = "Ancient Tome Slam"
+type = 0
+value = 0
+weight = 3
+description = "Slams with a heavy tome dealing 15 damage."

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://bac6xeq8gr4i2"]
+
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_ability"]
+
+[resource]
+script = ExtResource("1_ability")
+name = "Seal Scroll"
+type = 2  # BUFF
+value = 2
+weight = 1
+description = "Seals all card decoding for 2 turns."
