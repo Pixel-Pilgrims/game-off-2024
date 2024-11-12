@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://d02eoja420eub"]
+
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_ability"]
+
+[resource]
+script = ExtResource("1_ability")
+name = "Stone Form"
+type = 1
+value = 0
+weight = 2
+description = "Hardens into stone gaining 15 block."

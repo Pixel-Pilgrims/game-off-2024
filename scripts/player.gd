@@ -8,8 +8,8 @@ signal block_gained(amount: int)
 
 @onready var health_bar: HealthBar = $HealthBar
 
-@export var health: int = 40
-@export var max_health: int = 40
+@export var health: int = 100
+@export var max_health: int = 100
 @export var block: int = 0
 @export var current_energy: int = 3
 @export var max_energy: int = 3
@@ -25,6 +25,7 @@ func take_damage(amount: int) -> void:
 		amount -= blocked
 		block -= blocked
 		health_bar.set_block(block)
+		print("Player blocked ", blocked, " damage.")
 	
 	# Then reduce health
 	if amount > 0:

@@ -7,7 +7,7 @@ extends Node
 
 const NODE_SCENE = preload("res://scenes/encounter_node.tscn")
 @export var COLUMN_SPACING = 400
-@export var NODE_SPACING = 600
+@export var NODE_SPACING = 400
 @export var NODE_SIZE = 100
 @export var LINE_COLOR = Color("6b7280")
 @export var LINE_WIDTH = 3.0

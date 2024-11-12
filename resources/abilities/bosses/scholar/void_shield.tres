@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://void_shield"]
+
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_ability"]
+
+[resource]
+script = ExtResource("1_ability")
+name = "Void Shield"
+type = 2  # BUFF
+value = 50
+weight = 2
+description = "Takes 50% less damage from decoded cards this turn."
