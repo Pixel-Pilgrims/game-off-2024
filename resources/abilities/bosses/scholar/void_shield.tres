@@ -1,11 +1,18 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://void_shield"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://bq0qaa7a821ku"]
 
 [ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_ability"]
+[ext_resource type="Script" path="res://scripts/effects/ability_effect.gd" id="1_v53dm"]
+[ext_resource type="Script" path="res://scripts/effects/decoded_card_resist_effect.gd" id="2_3qjhc"]
+
+[sub_resource type="Resource" id="Resource_1fp0p"]
+script = ExtResource("2_3qjhc")
+parameters = {
+"value": 50
+}
 
 [resource]
 script = ExtResource("1_ability")
 name = "Void Shield"
-type = 2  # BUFF
-value = 50
+effects = Array[ExtResource("1_v53dm")]([SubResource("Resource_1fp0p")])
 weight = 2
 description = "Takes 50% less damage from decoded cards this turn."

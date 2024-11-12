@@ -1,11 +1,19 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://df2hudinfu3iv"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://df2hudinfu3iv"]
 
 [ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_32x2t"]
+[ext_resource type="Script" path="res://scripts/effects/ability_effect.gd" id="1_lbhpu"]
+[ext_resource type="Script" path="res://scripts/effects/damage_effect.gd" id="2_x6a1i"]
+
+[sub_resource type="Resource" id="Resource_1rqcj"]
+script = ExtResource("2_x6a1i")
+parameters = {
+"max_damage": 12,
+"min_damage": 7
+}
 
 [resource]
 script = ExtResource("1_32x2t")
 name = "Dark Ritual"
-type = 0
-value = 9
+effects = Array[ExtResource("1_lbhpu")]([SubResource("Resource_1rqcj")])
 weight = 1
 description = "A powerful dark magic attack that deals 9 damage."

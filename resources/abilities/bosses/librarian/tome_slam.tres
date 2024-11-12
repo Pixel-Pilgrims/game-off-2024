@@ -1,11 +1,19 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://dnvhj5c8rxs1e"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://dnvhj5c8rxs1e"]
 
 [ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_ability"]
+[ext_resource type="Script" path="res://scripts/effects/ability_effect.gd" id="1_epc7p"]
+[ext_resource type="Script" path="res://scripts/effects/damage_effect.gd" id="2_3n0sf"]
+
+[sub_resource type="Resource" id="Resource_ipiux"]
+script = ExtResource("2_3n0sf")
+parameters = {
+"max_damage": 15,
+"min_damage": 10
+}
 
 [resource]
 script = ExtResource("1_ability")
 name = "Ancient Tome Slam"
-type = 0
-value = 0
+effects = Array[ExtResource("1_epc7p")]([SubResource("Resource_ipiux")])
 weight = 3
 description = "Slams with a heavy tome dealing 15 damage."

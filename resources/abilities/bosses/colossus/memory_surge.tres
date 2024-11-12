@@ -1,11 +1,18 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://memory_surge"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://dbnx6sxany16a"]
 
+[ext_resource type="Script" path="res://scripts/effects/ability_effect.gd" id="1_0oxrn"]
 [ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_ability"]
+[ext_resource type="Script" path="res://scripts/effects/strength_effect.gd" id="2_t70th"]
+
+[sub_resource type="Resource" id="Resource_xmmuo"]
+script = ExtResource("2_t70th")
+parameters = {
+"value": 3
+}
 
 [resource]
 script = ExtResource("1_ability")
 name = "Memory Surge"
-type = 2  # BUFF
-value = 3
+effects = Array[ExtResource("1_0oxrn")]([SubResource("Resource_xmmuo")])
 weight = 2
 description = "Gains 3 strength for each unread card in your hand."

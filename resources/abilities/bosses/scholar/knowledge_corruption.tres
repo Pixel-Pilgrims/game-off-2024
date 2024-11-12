@@ -1,11 +1,18 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://knowledge_corruption"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://qqocts3i2bf5"]
 
 [ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_ability"]
+[ext_resource type="Script" path="res://scripts/effects/ability_effect.gd" id="1_y5fmi"]
+[ext_resource type="Script" path="res://scripts/effects/corrupt_knowledge_effect.gd" id="2_k65yi"]
+
+[sub_resource type="Resource" id="Resource_iv1fq"]
+script = ExtResource("2_k65yi")
+parameters = {
+"value": 1
+}
 
 [resource]
 script = ExtResource("1_ability")
 name = "Knowledge Corruption"
-type = 3  # DEBUFF
-value = 1
+effects = Array[ExtResource("1_y5fmi")]([SubResource("Resource_iv1fq")])
 weight = 1
 description = "Scrambles your decoded card information for 1 card."

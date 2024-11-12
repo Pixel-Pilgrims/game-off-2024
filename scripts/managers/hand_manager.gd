@@ -61,3 +61,22 @@ func reshuffle_discard() -> void:
 func _on_card_played(card: Variant) -> void:
 	hand.remove_at(hand.find(card))
 	discard_pile.append(card.card_data)
+	
+func force_play_random_cards(amount: int) -> void:
+	var cards_to_play = min(amount, hand.size())
+	for i in range(cards_to_play):
+		if hand.size() > 0:
+			var random_index = randi() % hand.size()
+			var card = hand[random_index]
+			card.play_card()
+
+func corrupt_random_cards(amount: int) -> void:
+	var decoded_cards = []
+	for card in hand:
+		if card.has_decoded_aspects():
+			decoded_cards.append(card)
+	
+	# Shuffle and corrupt up to 'amount' cards
+	decoded_cards.shuffle()
+	for i in range(min(amount, decoded_cards.size())):
+		decoded_cards[i].corrupt_knowledge()

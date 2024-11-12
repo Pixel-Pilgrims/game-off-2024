@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_fs2q8"]
 [ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1_script"]
-[ext_resource type="Resource" path="res://resources/abilities/bosses/librarian/seal_scroll.tres" id="2_cm3kg"]
+[ext_resource type="Resource" uid="uid://bac6xeq8gr4i2" path="res://resources/abilities/bosses/librarian/drain_strength.tres" id="2_cm3kg"]
 [ext_resource type="PackedScene" uid="uid://cbtac01eivwim" path="res://scenes/enemies/cultist.tscn" id="2_enemy"]
-[ext_resource type="Resource" path="res://resources/abilities/bosses/librarian/knowledge_ward.tres" id="3_j2nrr"]
-[ext_resource type="Resource" path="res://resources/abilities/bosses/librarian/tome_slam.tres" id="4_lkjm0"]
+[ext_resource type="Resource" uid="uid://b6322ib2s7xct" path="res://resources/abilities/bosses/librarian/knowledge_ward.tres" id="3_j2nrr"]
+[ext_resource type="Resource" uid="uid://dnvhj5c8rxs1e" path="res://resources/abilities/bosses/librarian/tome_slam.tres" id="4_lkjm0"]
 
 [resource]
 script = ExtResource("1_script")
