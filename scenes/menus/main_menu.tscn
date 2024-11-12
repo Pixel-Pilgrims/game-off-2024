@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxru22786wp6n"]
+[gd_scene load_steps=3 format=3 uid="uid://bxru22786wp6n"]
 
 [ext_resource type="Script" path="res://scripts/scenes/main_menu.gd" id="1_prvtn"]
+[ext_resource type="Script" path="res://scripts/ui/audio_button.gd" id="2_l6w84"]
 
 [node name="MainMenu" type="CenterContainer"]
 anchors_preset = 15
@@ -23,21 +24,25 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 disabled = true
 text = "Continue Game"
+script = ExtResource("2_l6w84")
 
 [node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "New Game"
+script = ExtResource("2_l6w84")
 
 [node name="Options" type="Button" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Options"
+script = ExtResource("2_l6w84")
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Quit"
+script = ExtResource("2_l6w84")

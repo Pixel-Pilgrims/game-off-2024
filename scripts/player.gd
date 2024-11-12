@@ -1,4 +1,3 @@
-# scripts/player.gd
 extends Node2D
 
 signal died
@@ -7,6 +6,7 @@ signal damage_taken(amount: int)
 signal block_gained(amount: int)
 
 @onready var health_bar: HealthBar = $HealthBar
+@onready var combat_animator: CombatAnimator = $CombatAnimator
 
 @export var health: int = 100
 @export var max_health: int = 100
@@ -16,31 +16,39 @@ signal block_gained(amount: int)
 
 func _ready() -> void:
 	update_energy_display()
-	health_bar.setup(max_health, true)  # 100 max HP, show numbers
+	health_bar.setup(max_health, true)
 
 func take_damage(amount: int) -> void:
+	SoundEffectsSystem.play_sound("combat", "damage_taken", -5.0)
+	
 	# First reduce block
+	var initial_block = block
+	var initial_health = health
+	var remaining_damage = amount
+	
 	if block > 0:
 		var blocked = min(block, amount)
-		amount -= blocked
+		remaining_damage -= blocked
 		block -= blocked
-		health_bar.set_block(block)
+		if blocked > 0:
+			await combat_animator.animate_block_change(initial_block, block, health_bar)
 		print("Player blocked ", blocked, " damage.")
 	
 	# Then reduce health
-	if amount > 0:
-		health -= amount
-		health_bar.set_health(health)
-		print("Player took ", amount, " damage. Health: ", health)
+	if remaining_damage > 0:
+		health -= remaining_damage
+		await combat_animator.animate_health_change(initial_health, health, health_bar)
 	
-	damage_taken.emit(amount)    
+	damage_taken.emit(amount)
 	
 	if health <= 0:
 		died.emit()
 
 func gain_block(amount: int) -> void:
+	SoundEffectsSystem.play_sound("combat", "block", -5.0)
+	var initial_block = block
 	block += amount
-	health_bar.set_block(block)
+	await combat_animator.animate_block_change(initial_block, block, health_bar)
 	block_gained.emit(amount)
 
 func update_energy_display() -> void:
@@ -48,8 +56,10 @@ func update_energy_display() -> void:
 
 func start_turn() -> void:
 	current_energy = max_energy
+	var initial_block = block
 	block = 0
-	health_bar.set_block(block)
+	if initial_block > 0:
+		await combat_animator.animate_block_change(initial_block, 0, health_bar)
 	update_energy_display()
 
 func spend_energy(amount: int) -> void:
