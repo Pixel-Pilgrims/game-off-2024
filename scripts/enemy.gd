@@ -24,12 +24,10 @@ func take_damage(amount: int) -> void:
 	SoundEffectsSystem.play_sound("combat", "damage_taken", -5.0)
 	await combat_animator.animate_health_change(initial_health, health, health_bar)
 	damage_taken.emit(amount)
-	var message = "Enemy took  {amount} damage".format({"amount": amount})
 
-	CombatLogSystem.add(message)
-	print("Enemy took ", amount, " damage")
+	CombatLogSystem.add("Enemy took  {amount} damage".format({"amount": amount}))
 	if health <= 0:
-		print("Enemy died")
+		CombatLogSystem.add("Enemy died")
 		died.emit()
 		queue_free()
 
@@ -51,7 +49,7 @@ func take_turn() -> void:
 	turn_ended.emit()
 
 func execute_intent() -> void:
-	print("Enemy uses ", current_intent.name)
+	CombatLogSystem.add("Enemy uses {intent}".format({"intent": current_intent.name}))
 	match current_intent.type:
 		AbilityData.AbilityType.ATTACK:
 			# Find player node
