@@ -94,7 +94,7 @@ func play_card() -> void:
 	if player.can_spend_energy(card_data.energy_cost):
 		# Play card sound
 		SoundEffectsSystem.play_sound("ui", "card_play", -5.0)
-		print("Player played ", card_data.name)
+		CombatLogSystem.add("Player played {card}".format({"card": card_data.name}))
 		player.spend_energy(card_data.energy_cost)
 		execute_effect()
 		card_played.emit(self)
