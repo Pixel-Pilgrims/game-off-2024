@@ -24,6 +24,9 @@ func take_damage(amount: int) -> void:
 	SoundEffectsSystem.play_sound("combat", "damage_taken", -5.0)
 	await combat_animator.animate_health_change(initial_health, health, health_bar)
 	damage_taken.emit(amount)
+	var message = "Enemy took  {amount} damage".format({"amount": amount})
+
+	CombatLogSystem.add(message)
 	print("Enemy took ", amount, " damage")
 	if health <= 0:
 		print("Enemy died")

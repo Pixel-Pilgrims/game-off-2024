@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://bfp8ou07kgkua"]
+[gd_scene load_steps=2 format=3 uid="uid://bfp8ou07kgkua"]
+
+[ext_resource type="Script" path="res://scenes/menus/combat_log_list.gd" id="1_iavmw"]
 
 [node name="CombatLogMenu" type="Control"]
 process_mode = 3
@@ -60,3 +62,4 @@ layout_mode = 2
 [node name="CombatLogList" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("1_iavmw")
