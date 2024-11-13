@@ -7,6 +7,7 @@ signal effect_executed(effect_type: String, value: int, target: Node)
 var card_data: CardData
 var decoded_aspects: Dictionary = {}
 
+@onready var sprite: Sprite2D = $Sprite2D
 @onready var cost_label: Label = $MarginContainer/VBoxContainer/TopBar/CostLabel
 @onready var name_label: Label = $MarginContainer/VBoxContainer/TopBar/NameLabel
 @onready var effect_label: Label = $MarginContainer/VBoxContainer/EffectLabel
@@ -27,6 +28,18 @@ func _ready() -> void:
 	$MarginContainer.offset_right = 0
 	$MarginContainer.offset_bottom = 0
 	
+	# Setup shader
+	var material = ShaderMaterial.new()
+	material.shader = preload("res://resources/shaders/card_glow.gdshader")
+	sprite.material = material
+	# Start with no glow
+	set_selected(false)
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+	
+	# Important: Enable mouse processing
+	mouse_filter = Control.MOUSE_FILTER_STOP
+
 	# Update card display
 	update_display()
 
@@ -151,9 +164,18 @@ func _on_decode_option_selected(id: int) -> void:
 		1: decoder.decode_aspect(self, "type")
 		2: decoder.decode_aspect(self, "value")
 		3: decoder.decode_aspect(self, "description")
-		
-func _on_mouse_entered() -> void:
+
+func set_selected(is_selected: bool):
+	if not sprite.material:
+		return
+	sprite.material.set_shader_parameter("glow_strength", 1.0 if is_selected else 0.0)
+
+func _on_mouse_entered():
 	SoundEffectsSystem.play_sound("ui", "card_hover", -15.0)
+	set_selected(true)
+
+func _on_mouse_exited():
+	set_selected(false)
 
 func corrupt_knowledge() -> void:
 	var aspects_list = decoded_aspects.keys()

@@ -39,8 +39,8 @@ func decode_aspect(card: Node, aspect: String) -> void:
 	aspect_decoded.emit(card_id, aspect)
 	
 	# Update decode UI if it's visible
-	var decode_ui = get_node("/root/Main/Combat/UI/DecodeUI")
-	if decode_ui and decode_ui.visible:
+	var decode_ui = get_node_or_null("/root/Main/Combat/UI/DecodeUI")
+	if decode_ui and decode_ui.visible and decode_ui.has_method("update_points"):
 		decode_ui.update_points()
 
 func add_points(amount: int) -> void:

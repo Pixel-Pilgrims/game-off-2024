@@ -3,6 +3,7 @@ extends Node
 @onready var combat_scene = preload("res://scenes/combat.tscn")
 @onready var menu_scene = preload("res://scenes/menus/main_menu.tscn")
 @onready var home_base_scene = preload("res://scenes/home_base.tscn")
+@onready var decode_shop_scene = preload("res://scenes/shop.tscn")
 
 var current_scene: Node = null
 
@@ -42,6 +43,10 @@ func start_combat() -> void:
 	var new_combat = combat_scene.instantiate()
 	call_deferred("transition_to_scene", new_combat)
 
+func start_decode_shop() -> void:
+	var new_decode_shop = decode_shop_scene.instantiate()
+	call_deferred("transition_to_scene", new_decode_shop)
+	
 func start_home_base() -> void:
 	var new_home = home_base_scene.instantiate()
 	call_deferred("transition_to_scene", new_home)
