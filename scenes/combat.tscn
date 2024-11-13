@@ -1,6 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b3l57gnlln63g"]
 
 [ext_resource type="Script" path="res://scripts/scenes/combat.gd" id="1_n5yyl"]
+[ext_resource type="Script" path="res://scripts/managers/combat_log_manager.gd" id="7_n5yyl"]
 [ext_resource type="Script" path="res://scripts/managers/combat_manager.gd" id="2_305ab"]
 [ext_resource type="Script" path="res://scripts/managers/hand_manager.gd" id="3_bdk6y"]
 [ext_resource type="Script" path="res://scripts/managers/pause_manager.gd" id="5_pl43j"]
@@ -9,6 +10,9 @@
 
 [node name="Combat" type="Node2D"]
 script = ExtResource("1_n5yyl")
+
+[node name="CombatLogManager" type="Node" parent="."]
+script = ExtResource("7_n5yyl")
 
 [node name="CombatManager" type="Node" parent="."]
 script = ExtResource("2_305ab")
@@ -100,3 +104,20 @@ theme_override_font_sizes/font_size = 140
 text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CombatLogMarginContainer" type="MarginContainer" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -84.0
+offset_right = 207.0
+offset_bottom = -44.0
+grow_vertical = 0
+
+[node name="CombatLogButton" type="Button" parent="UI/HUD/CombatLogMarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "Combat Log"

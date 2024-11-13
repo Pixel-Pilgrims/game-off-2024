@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://boov2saejccy7"]
+[gd_scene load_steps=5 format=3 uid="uid://caagg73csarka"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_o86w8"]
-[ext_resource type="Texture2D" uid="uid://bqjhgi43f43w2" path="res://assets/player/player_sprite.png" id="2_h6yh7"]
+[ext_resource type="Texture2D" uid="uid://cyctf0hynl44d" path="res://assets/player/player_sprite.png" id="2_h6yh7"]
 [ext_resource type="PackedScene" uid="uid://c0l75fsf0a0lh" path="res://scenes/ui/health_bar.tscn" id="3_gufyl"]
 [ext_resource type="Script" path="res://scripts/animators/combat_animator.gd" id="4_10708"]
 

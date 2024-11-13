@@ -32,7 +32,7 @@ func take_damage(amount: int) -> void:
 		block -= blocked
 		if blocked > 0:
 			await combat_animator.animate_block_change(initial_block, block, health_bar)
-		print("Player blocked ", blocked, " damage.")
+		CombatLogSystem.add("Player blocked {amount} damage.".format({"amount": blocked}))
 	
 	# Then reduce health
 	if remaining_damage > 0:

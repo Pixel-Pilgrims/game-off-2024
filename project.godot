@@ -23,6 +23,7 @@ BackgroundSystem="*res://scripts/systems/background_system.gd"
 CutsceneSystem="*res://scripts/systems/cutscene_system.gd"
 MusicSystem="*res://scripts/systems/music_system.gd"
 SoundEffectsSystem="*res://scripts/systems/sound_effects_system.gd"
+CombatLogSystem="*res://scripts/systems/combat_log_system.gd"
 
 [display]
 
