@@ -70,8 +70,7 @@ func take_damage(amount: int, from_decoded: bool = false) -> void:
 		combat_animator.animate_health_change(initial_health, health, health_bar)
 	
 	damage_taken.emit(final_amount)
-	print("Enemy took ", final_amount, " damage (original: ", amount, ")")
-  CombatLogSystem.add("Enemy took  {amount} damage".format({"amount": amount}))
+  	CombatLogSystem.add("Enemy took  {final_amount} damage (original: {amount})".format({"final_amount": final_amount, "amount": amount}))
 	
 	if health <= 0:
 		CombatLogSystem.add("Enemy died")
@@ -109,8 +108,7 @@ func end_turn() -> void:
 func execute_intent() -> void:
 	if not current_intent:
 		return
-	print("Enemy uses ", current_intent.name)
-  CombatLogSystem.add("Enemy uses {intent}".format({"intent": current_intent.name}))
+  	CombatLogSystem.add("Enemy uses {intent}".format({"intent": current_intent.name}))
 	
 	var target = get_node_or_null("/root/Main/Combat/Player")
 	if not target:
