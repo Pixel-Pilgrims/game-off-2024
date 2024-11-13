@@ -1,11 +1,18 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://forced_recall"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://umfgaernudr5"]
 
+[ext_resource type="Script" path="res://scripts/effects/ability_effect.gd" id="1_8leyx"]
 [ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_ability"]
+[ext_resource type="Script" path="res://scripts/effects/force_play_effect.gd" id="2_t555q"]
+
+[sub_resource type="Resource" id="Resource_8m6t3"]
+script = ExtResource("2_t555q")
+parameters = {
+"value": 1
+}
 
 [resource]
 script = ExtResource("1_ability")
 name = "Forced Recall"
-type = 3  # DEBUFF
-value = 1
+effects = Array[ExtResource("1_8leyx")]([SubResource("Resource_8m6t3")])
 weight = 1
 description = "Forces you to play 1 random card next turn."

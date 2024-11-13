@@ -111,7 +111,9 @@ func execute_effect() -> void:
 			var enemies_container = combat_scene.get_node("EnemiesContainer")
 			if enemies_container and enemies_container.get_child_count() > 0:
 				var enemy = enemies_container.get_child(0)
-				enemy.take_damage(effect_value)
+				# Pass whether this card is decoded
+				var is_decoded = is_aspect_decoded("value")
+				enemy.take_damage(effect_value, is_decoded)
 				effect_executed.emit("attack", effect_value, enemy)
 		"block":
 			var player = combat_scene.get_node("Player")
@@ -152,3 +154,12 @@ func _on_decode_option_selected(id: int) -> void:
 		
 func _on_mouse_entered() -> void:
 	SoundEffectsSystem.play_sound("ui", "card_hover", -15.0)
+
+func corrupt_knowledge() -> void:
+	var aspects_list = decoded_aspects.keys()
+	if aspects_list.size() > 0:
+		# Randomly remove one decoded aspect
+		var aspect = aspects_list[randi() % aspects_list.size()]
+		decoded_aspects.erase(aspect)
+		GameState.decode_aspects[card_data.resource_path].erase(aspect)
+		update_display()

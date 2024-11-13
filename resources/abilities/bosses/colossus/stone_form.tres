@@ -1,11 +1,18 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://d02eoja420eub"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://d02eoja420eub"]
 
 [ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_ability"]
+[ext_resource type="Script" path="res://scripts/effects/ability_effect.gd" id="1_g4fcm"]
+[ext_resource type="Script" path="res://scripts/effects/block_effect.gd" id="2_i3nyb"]
+
+[sub_resource type="Resource" id="Resource_pfj30"]
+script = ExtResource("2_i3nyb")
+parameters = {
+"value": 15
+}
 
 [resource]
 script = ExtResource("1_ability")
 name = "Stone Form"
-type = 1
-value = 0
+effects = Array[ExtResource("1_g4fcm")]([SubResource("Resource_pfj30")])
 weight = 2
 description = "Hardens into stone gaining 15 block."

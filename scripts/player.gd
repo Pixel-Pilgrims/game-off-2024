@@ -38,6 +38,7 @@ func take_damage(amount: int) -> void:
 	if remaining_damage > 0:
 		health -= remaining_damage
 		await combat_animator.animate_health_change(initial_health, health, health_bar)
+		print("Player took ", remaining_damage, " health damage.")
 	
 	damage_taken.emit(amount)
 	

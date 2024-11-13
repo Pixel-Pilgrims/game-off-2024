@@ -1,11 +1,19 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://17tkjbfkx2sh"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://17tkjbfkx2sh"]
 
+[ext_resource type="Script" path="res://scripts/effects/ability_effect.gd" id="1_5i510"]
 [ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_nhtau"]
+[ext_resource type="Script" path="res://scripts/effects/damage_effect.gd" id="2_igbh0"]
+
+[sub_resource type="Resource" id="Resource_kjhuo"]
+script = ExtResource("2_igbh0")
+parameters = {
+"max_damage": 5,
+"min_damage": 3
+}
 
 [resource]
 script = ExtResource("1_nhtau")
 name = "Slash"
-type = 0
-value = 6
+effects = Array[ExtResource("1_5i510")]([SubResource("Resource_kjhuo")])
 weight = 1
 description = "A basic slashing attack that deals 6 damage."

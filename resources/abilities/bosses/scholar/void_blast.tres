@@ -1,11 +1,19 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://void_blast"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://nt0yhrp5bo86"]
 
 [ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_ability"]
+[ext_resource type="Script" path="res://scripts/effects/ability_effect.gd" id="1_g4xge"]
+[ext_resource type="Script" path="res://scripts/effects/damage_effect.gd" id="2_2ebc2"]
+
+[sub_resource type="Resource" id="Resource_wr2ye"]
+script = ExtResource("2_2ebc2")
+parameters = {
+"max_damage": 12,
+"min_damage": 8
+}
 
 [resource]
 script = ExtResource("1_ability")
 name = "Void Blast"
-type = 0  # ATTACK
-value = 12
+effects = Array[ExtResource("1_g4xge")]([SubResource("Resource_wr2ye")])
 weight = 3
 description = "Channels void energy dealing 12 damage."
