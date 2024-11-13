@@ -1,11 +1,19 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://memory_crush"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://dt2rcypnegbmf"]
 
+[ext_resource type="Script" path="res://scripts/effects/ability_effect.gd" id="1_0stwl"]
 [ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="1_ability"]
+[ext_resource type="Script" path="res://scripts/effects/damage_effect.gd" id="2_bhcqk"]
+
+[sub_resource type="Resource" id="Resource_3r653"]
+script = ExtResource("2_bhcqk")
+parameters = {
+"max_damage": 20,
+"min_damage": 15
+}
 
 [resource]
 script = ExtResource("1_ability")
 name = "Memory Crush"
-type = 0  # ATTACK
-value = 20
+effects = Array[ExtResource("1_0stwl")]([SubResource("Resource_3r653")])
 weight = 2
 description = "A devastating blow dealing 20 damage."

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://bac6xeq8gr4i2"]
+
+[ext_resource type="Script" path="res://scripts/effects/ability_effect.gd" id="1_joppq"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_e5f3f"]
+[ext_resource type="Script" path="res://scripts/effects/weakness_effect.gd" id="2_ypp4s"]
+
+[sub_resource type="Resource" id="Resource_hl8b2"]
+script = ExtResource("2_ypp4s")
+parameters = {
+"value": 5
+}
+
+[resource]
+script = ExtResource("2_e5f3f")
+name = "Seal Scroll"
+effects = Array[ExtResource("1_joppq")]([SubResource("Resource_hl8b2")])
+weight = 1
+description = "Drains 5 strength from the target."

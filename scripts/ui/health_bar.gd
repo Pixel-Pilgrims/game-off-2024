@@ -3,8 +3,7 @@ class_name HealthBar
 
 @onready var health_bar = $VBoxContainer/HealthBar
 @onready var health_label = $VBoxContainer/HealthBar/HealthLabel
-@onready var block_bar = $VBoxContainer/BlockBar
-@onready var block_label = $VBoxContainer/BlockBar/BlockLabel
+@onready var block_indicator = $BlockIndicator
 @onready var buff_container = $VBoxContainer/BuffContainer
 @onready var v_box = $VBoxContainer
 
@@ -19,7 +18,7 @@ var show_numbers: bool = true
 func _ready():
 	setup_styles()
 	update_display()
-	block_bar.hide()
+	block_indicator.hide()
 
 func setup_styles():
 	# Health bar styles
@@ -39,24 +38,6 @@ func setup_styles():
 	
 	health_bar.add_theme_stylebox_override("background", health_bg)
 	health_bar.add_theme_stylebox_override("fill", health_fill)
-	
-	# Block bar styles
-	var block_bg = StyleBoxFlat.new()
-	block_bg.bg_color = Color("333333")  # Dark gray
-	block_bg.corner_radius_top_left = 4
-	block_bg.corner_radius_top_right = 4
-	block_bg.corner_radius_bottom_left = 4
-	block_bg.corner_radius_bottom_right = 4
-	
-	var block_fill = StyleBoxFlat.new()
-	block_fill.bg_color = Color("2b4066")  # Dark blue
-	block_fill.corner_radius_top_left = 4
-	block_fill.corner_radius_top_right = 4
-	block_fill.corner_radius_bottom_left = 4
-	block_fill.corner_radius_bottom_right = 4
-	
-	block_bar.add_theme_stylebox_override("background", block_bg)
-	block_bar.add_theme_stylebox_override("fill", block_fill)
 
 func setup(max_hp: float, show_nums: bool = true):
 	if not is_node_ready():
@@ -77,7 +58,6 @@ func set_block(value: float):
 	if not is_node_ready():
 		await ready
 	block_amount = max(value, 0)
-	block_bar.visible = block_amount > 0
 	update_display()
 
 func add_buff(buff_icon: Texture2D, duration: int = -1):
@@ -102,9 +82,8 @@ func update_display():
 	if show_numbers:
 		health_label.text = "%d/%d" % [current_health, max_health]
 		health_label.show()
-		block_label.text = "%d" % [block_amount]
+		block_indicator.set_block(block_amount)
 	else:
 		health_label.hide()
-		block_label.hide()
 		
 	health_bar.value = current_health
