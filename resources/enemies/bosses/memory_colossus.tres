@@ -6,7 +6,7 @@
 [ext_resource type="Resource" path="res://resources/abilities/bosses/colossus/forced_recall.tres" id="2_u5hn7"]
 [ext_resource type="Resource" path="res://resources/abilities/bosses/colossus/memory_crush.tres" id="3_wcx5e"]
 [ext_resource type="Resource" path="res://resources/abilities/bosses/colossus/memory_surge.tres" id="4_sduki"]
-[ext_resource type="Resource" path="res://resources/abilities/bosses/colossus/stone_form.tres" id="5_xhaua"]
+[ext_resource type="Resource" uid="uid://d02eoja420eub" path="res://resources/abilities/bosses/colossus/stone_form.tres" id="5_xhaua"]
 
 [resource]
 script = ExtResource("1_script")

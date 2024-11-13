@@ -42,16 +42,12 @@ func setup_signal_connections() -> void:
 func connect_enemy_signals(enemy: Node) -> void:
 	if not enemy.died.is_connected(_check_combat_state):
 		enemy.died.connect(_check_combat_state)
-	if not enemy.attack_executed.is_connected(_on_enemy_attack):
-		enemy.attack_executed.connect(_on_enemy_attack)
 	if not enemy.turn_ended.is_connected(_on_enemy_turn_ended):
 		enemy.turn_ended.connect(_on_enemy_turn_ended)
 
 func disconnect_enemy_signals(enemy: Node) -> void:
 	if enemy.died.is_connected(_check_combat_state):
 		enemy.died.disconnect(_check_combat_state)
-	if enemy.attack_executed.is_connected(_on_enemy_attack):
-		enemy.attack_executed.disconnect(_on_enemy_attack)
 	if enemy.turn_ended.is_connected(_on_enemy_turn_ended):
 		enemy.turn_ended.disconnect(_on_enemy_turn_ended)
 

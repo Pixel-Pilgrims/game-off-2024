@@ -1,9 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfak1n7dqxgc5"]
+[gd_scene load_steps=2 format=3 uid="uid://bfp8ou07kgkua"]
 
-[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_p7luq"]
-[ext_resource type="Script" path="res://scripts/ui/audio_button.gd" id="2_yb0ds"]
+[ext_resource type="Script" path="res://scenes/menus/combat_log_list.gd" id="1_iavmw"]
 
-[node name="PauseMenu" type="Control"]
+[node name="CombatLogMenu" type="Control"]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -12,7 +11,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_p7luq")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -34,7 +32,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
-custom_minimum_size = Vector2(400, 200)
+custom_minimum_size = Vector2(600, 600)
 layout_mode = 2
 mouse_filter = 2
 
@@ -54,23 +52,14 @@ theme_override_constants/separation = 16
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "PAUSED"
+text = "Combat Log"
 horizontal_alignment = 1
 
-[node name="ResumeButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 50)
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
-size_flags_horizontal = 4
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 24
-text = "Resume"
-script = ExtResource("2_yb0ds")
 
-[node name="QuitButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 50)
+[node name="CombatLogList" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 24
-text = "Quit to Menu"
-script = ExtResource("2_yb0ds")
+script = ExtResource("1_iavmw")

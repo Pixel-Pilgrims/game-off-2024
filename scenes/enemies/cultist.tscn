@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cbtac01eivwim"]
 
-[ext_resource type="Texture2D" uid="uid://dv14q1ehrvsd7" path="res://assets/enemies/cultist.png" id="2_1jg2a"]
+[ext_resource type="Texture2D" uid="uid://diuvspo7cocwb" path="res://assets/enemies/cultist.png" id="2_1jg2a"]
 
 [node name="Cultist" type="Node2D"]
 

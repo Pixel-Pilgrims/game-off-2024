@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0l75fsf0a0lh"]
+[gd_scene load_steps=3 format=3 uid="uid://c0l75fsf0a0lh"]
 
 [ext_resource type="Script" path="res://scripts/ui/health_bar.gd" id="1_script"]
+[ext_resource type="Script" path="res://scripts/ui/block_indicator.gd" id="2_rif3p"]
 
 [node name="HealthBar" type="Control"]
 custom_minimum_size = Vector2(200, 50)
@@ -38,23 +39,23 @@ theme_override_font_sizes/font_size = 40
 text = "100/100"
 horizontal_alignment = 1
 
-[node name="BlockBar" type="ProgressBar" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-max_value = 1.0
-show_percentage = false
-
-[node name="BlockLabel" type="Label" parent="VBoxContainer/BlockBar"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "100/100"
-horizontal_alignment = 1
-
 [node name="BuffContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 4
+
+[node name="BlockIndicator" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -50.0
+offset_top = -30.0
+offset_right = 50.0
+offset_bottom = 70.0
+script = ExtResource("2_rif3p")
+
+[node name="BlockLabel" type="Label" parent="BlockIndicator"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 44
+horizontal_alignment = 1
+vertical_alignment = 1

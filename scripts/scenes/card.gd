@@ -107,7 +107,7 @@ func play_card() -> void:
 	if player.can_spend_energy(card_data.energy_cost):
 		# Play card sound
 		SoundEffectsSystem.play_sound("ui", "card_play", -5.0)
-		print("Player played ", card_data.name)
+		CombatLogSystem.add("Player played {card}".format({"card": card_data.name}))
 		player.spend_energy(card_data.energy_cost)
 		execute_effect()
 		card_played.emit(self)
@@ -124,7 +124,9 @@ func execute_effect() -> void:
 			var enemies_container = combat_scene.get_node("EnemiesContainer")
 			if enemies_container and enemies_container.get_child_count() > 0:
 				var enemy = enemies_container.get_child(0)
-				enemy.take_damage(effect_value)
+				# Pass whether this card is decoded
+				var is_decoded = is_aspect_decoded("value")
+				enemy.take_damage(effect_value, is_decoded)
 				effect_executed.emit("attack", effect_value, enemy)
 		"block":
 			var player = combat_scene.get_node("Player")
@@ -174,3 +176,12 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	set_selected(false)
+
+func corrupt_knowledge() -> void:
+	var aspects_list = decoded_aspects.keys()
+	if aspects_list.size() > 0:
+		# Randomly remove one decoded aspect
+		var aspect = aspects_list[randi() % aspects_list.size()]
+		decoded_aspects.erase(aspect)
+		GameState.decode_aspects[card_data.resource_path].erase(aspect)
+		update_display()
